@@ -1,0 +1,830 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ground_truth version="0.2" generated="2014-12-15T17:06:20.674141">
+  <software_used name="GT builder with inpainting" version="0.4"/>
+  <source_sample_file>background04/magazine004.mp4</source_sample_file>
+  <segmentation_results>
+    <frame index="1" rejected="false">
+      <point name="bl" x="1333.85" y="741.366"/>
+      <point name="tl" x="636.458" y="707.859"/>
+      <point name="tr" x="713.155" y="344.452"/>
+      <point name="br" x="1310.61" y="362.669"/>
+    </frame>
+    <frame index="2" rejected="false">
+      <point name="bl" x="1333.6" y="735.893"/>
+      <point name="tl" x="636.506" y="702.93"/>
+      <point name="tr" x="712.25" y="340.966"/>
+      <point name="br" x="1310.14" y="357.926"/>
+    </frame>
+    <frame index="3" rejected="false">
+      <point name="bl" x="1332.23" y="735.142"/>
+      <point name="tl" x="638.378" y="704.319"/>
+      <point name="tr" x="714.58" y="342.539"/>
+      <point name="br" x="1309.6" y="357.377"/>
+    </frame>
+    <frame index="4" rejected="false">
+      <point name="bl" x="1328.88" y="737.942"/>
+      <point name="tl" x="637.041" y="707.584"/>
+      <point name="tr" x="713.706" y="349.876"/>
+      <point name="br" x="1305.85" y="363.371"/>
+    </frame>
+    <frame index="5" rejected="false">
+      <point name="bl" x="1328.08" y="742.195"/>
+      <point name="tl" x="639.256" y="713.379"/>
+      <point name="tr" x="715.428" y="357.977"/>
+      <point name="br" x="1304.62" y="370.387"/>
+    </frame>
+    <frame index="6" rejected="false">
+      <point name="bl" x="1329.38" y="737.979"/>
+      <point name="tl" x="642.577" y="708.188"/>
+      <point name="tr" x="720.237" y="357.419"/>
+      <point name="br" x="1307.32" y="369.255"/>
+    </frame>
+    <frame index="7" rejected="false">
+      <point name="bl" x="1332.36" y="738.223"/>
+      <point name="tl" x="648.341" y="709.289"/>
+      <point name="tr" x="725.031" y="361.43"/>
+      <point name="br" x="1309.73" y="372.27"/>
+    </frame>
+    <frame index="8" rejected="false">
+      <point name="bl" x="1335.87" y="732.64"/>
+      <point name="tl" x="653.272" y="702.791"/>
+      <point name="tr" x="729.83" y="356.264"/>
+      <point name="br" x="1314.35" y="367.246"/>
+    </frame>
+    <frame index="9" rejected="false">
+      <point name="bl" x="1339.6" y="730.746"/>
+      <point name="tl" x="657.808" y="699.986"/>
+      <point name="tr" x="736.784" y="353.209"/>
+      <point name="br" x="1320.17" y="364.278"/>
+    </frame>
+    <frame index="10" rejected="false">
+      <point name="bl" x="1344.85" y="726.977"/>
+      <point name="tl" x="665.329" y="692.649"/>
+      <point name="tr" x="744.265" y="351.109"/>
+      <point name="br" x="1326.04" y="364.47"/>
+    </frame>
+    <frame index="11" rejected="false">
+      <point name="bl" x="1352.39" y="723.299"/>
+      <point name="tl" x="674.664" y="685.623"/>
+      <point name="tr" x="757.447" y="344.184"/>
+      <point name="br" x="1338.08" y="358.443"/>
+    </frame>
+    <frame index="12" rejected="false">
+      <point name="bl" x="1358.26" y="721.205"/>
+      <point name="tl" x="682.246" y="675.509"/>
+      <point name="tr" x="769.514" y="339.44"/>
+      <point name="br" x="1349.12" y="359.014"/>
+    </frame>
+    <frame index="13" rejected="false">
+      <point name="bl" x="1360.26" y="722.516"/>
+      <point name="tl" x="687.009" y="666.048"/>
+      <point name="tr" x="780.2" y="334.432"/>
+      <point name="br" x="1358.27" y="362.033"/>
+    </frame>
+    <frame index="14" rejected="false">
+      <point name="bl" x="1370.59" y="719.307"/>
+      <point name="tl" x="700.793" y="651.595"/>
+      <point name="tr" x="799.043" y="323.042"/>
+      <point name="br" x="1376.69" y="358.341"/>
+    </frame>
+    <frame index="15" rejected="false">
+      <point name="bl" x="1370.15" y="721.303"/>
+      <point name="tl" x="702.632" y="646.611"/>
+      <point name="tr" x="805.477" y="318.76"/>
+      <point name="br" x="1381.6" y="359.987"/>
+    </frame>
+    <frame index="16" rejected="false">
+      <point name="bl" x="1371.5" y="723.659"/>
+      <point name="tl" x="707.264" y="638.807"/>
+      <point name="tr" x="815.423" y="314.204"/>
+      <point name="br" x="1390.59" y="363.148"/>
+    </frame>
+    <frame index="17" rejected="false">
+      <point name="bl" x="1370.37" y="729.119"/>
+      <point name="tl" x="707.738" y="638.527"/>
+      <point name="tr" x="820.071" y="315.422"/>
+      <point name="br" x="1393.08" y="369.761"/>
+    </frame>
+    <frame index="18" rejected="false">
+      <point name="bl" x="1368.4" y="731.762"/>
+      <point name="tl" x="704.579" y="635.154"/>
+      <point name="tr" x="820.258" y="312.075"/>
+      <point name="br" x="1393.82" y="371.584"/>
+    </frame>
+    <frame index="19" rejected="false">
+      <point name="bl" x="1370.51" y="731.681"/>
+      <point name="tl" x="706.01" y="629.659"/>
+      <point name="tr" x="823.664" y="306.763"/>
+      <point name="br" x="1399.44" y="369.878"/>
+    </frame>
+    <frame index="20" rejected="false">
+      <point name="bl" x="1369.23" y="739.361"/>
+      <point name="tl" x="702.418" y="633.553"/>
+      <point name="tr" x="823.147" y="309.497"/>
+      <point name="br" x="1400.23" y="376.14"/>
+    </frame>
+    <frame index="21" rejected="false">
+      <point name="bl" x="1369.95" y="741.266"/>
+      <point name="tl" x="703.595" y="631.695"/>
+      <point name="tr" x="825.029" y="308.047"/>
+      <point name="br" x="1402.23" y="378.31"/>
+    </frame>
+    <frame index="22" rejected="false">
+      <point name="bl" x="1369.82" y="742.948"/>
+      <point name="tl" x="704.334" y="631.301"/>
+      <point name="tr" x="827.406" y="308.137"/>
+      <point name="br" x="1404.08" y="379.941"/>
+    </frame>
+    <frame index="23" rejected="false">
+      <point name="bl" x="1366.54" y="742.328"/>
+      <point name="tl" x="702.13" y="628.944"/>
+      <point name="tr" x="826.059" y="307.064"/>
+      <point name="br" x="1402.12" y="380.485"/>
+    </frame>
+    <frame index="24" rejected="false">
+      <point name="bl" x="1367.3" y="735.67"/>
+      <point name="tl" x="703.379" y="621.293"/>
+      <point name="tr" x="827.979" y="299.409"/>
+      <point name="br" x="1404.17" y="374.189"/>
+    </frame>
+    <frame index="25" rejected="false">
+      <point name="bl" x="1363.96" y="737.584"/>
+      <point name="tl" x="700.253" y="625.496"/>
+      <point name="tr" x="824.303" y="301.705"/>
+      <point name="br" x="1399.19" y="375.489"/>
+    </frame>
+    <frame index="26" rejected="false">
+      <point name="bl" x="1364.12" y="731.264"/>
+      <point name="tl" x="698.586" y="625.742"/>
+      <point name="tr" x="818.751" y="302.004"/>
+      <point name="br" x="1395.28" y="370.621"/>
+    </frame>
+    <frame index="27" rejected="false">
+      <point name="bl" x="1350.91" y="725.009"/>
+      <point name="tl" x="681.912" y="629.166"/>
+      <point name="tr" x="800.876" y="297.184"/>
+      <point name="br" x="1379.01" y="358.728"/>
+    </frame>
+    <frame index="28" rejected="false">
+      <point name="bl" x="1343.04" y="735.782"/>
+      <point name="tl" x="669.546" y="656.0"/>
+      <point name="tr" x="778.461" y="318.54"/>
+      <point name="br" x="1357.67" y="367.693"/>
+    </frame>
+    <frame index="29" rejected="false">
+      <point name="bl" x="1345.45" y="742.292"/>
+      <point name="tl" x="669.972" y="671.905"/>
+      <point name="tr" x="772.724" y="329.89"/>
+      <point name="br" x="1353.99" y="371.648"/>
+    </frame>
+    <frame index="30" rejected="false">
+      <point name="bl" x="1346.35" y="757.903"/>
+      <point name="tl" x="665.005" y="706.572"/>
+      <point name="tr" x="757.554" y="357.333"/>
+      <point name="br" x="1341.31" y="384.22"/>
+    </frame>
+    <frame index="31" rejected="false">
+      <point name="bl" x="1344.95" y="762.262"/>
+      <point name="tl" x="655.346" y="729.399"/>
+      <point name="tr" x="738.722" y="373.109"/>
+      <point name="br" x="1328.04" y="386.434"/>
+    </frame>
+    <frame index="32" rejected="false">
+      <point name="bl" x="1343.47" y="755.738"/>
+      <point name="tl" x="646.197" y="740.452"/>
+      <point name="tr" x="717.605" y="377.791"/>
+      <point name="br" x="1312.06" y="378.37"/>
+    </frame>
+    <frame index="33" rejected="false">
+      <point name="bl" x="1346.59" y="751.645"/>
+      <point name="tl" x="647.14" y="745.978"/>
+      <point name="tr" x="712.211" y="378.967"/>
+      <point name="br" x="1307.5" y="373.666"/>
+    </frame>
+    <frame index="34" rejected="false">
+      <point name="bl" x="1356.85" y="740.07"/>
+      <point name="tl" x="652.186" y="750.704"/>
+      <point name="tr" x="702.529" y="380.114"/>
+      <point name="br" x="1302.3" y="362.396"/>
+    </frame>
+    <frame index="35" rejected="false">
+      <point name="bl" x="1383.85" y="722.28"/>
+      <point name="tl" x="678.263" y="747.206"/>
+      <point name="tr" x="714.957" y="373.509"/>
+      <point name="br" x="1316.97" y="344.097"/>
+    </frame>
+    <frame index="36" rejected="false">
+      <point name="bl" x="1403.61" y="698.697"/>
+      <point name="tl" x="697.478" y="736.312"/>
+      <point name="tr" x="722.118" y="362.322"/>
+      <point name="br" x="1325.32" y="323.832"/>
+    </frame>
+    <frame index="37" rejected="false">
+      <point name="bl" x="1422.61" y="674.121"/>
+      <point name="tl" x="715.295" y="723.452"/>
+      <point name="tr" x="731.205" y="346.053"/>
+      <point name="br" x="1336.67" y="298.054"/>
+    </frame>
+    <frame index="38" rejected="false">
+      <point name="bl" x="1425.24" y="665.184"/>
+      <point name="tl" x="717.027" y="718.897"/>
+      <point name="tr" x="728.192" y="340.158"/>
+      <point name="br" x="1335.17" y="289.569"/>
+    </frame>
+    <frame index="39" rejected="false">
+      <point name="bl" x="1428.25" y="649.184"/>
+      <point name="tl" x="717.784" y="710.047"/>
+      <point name="tr" x="721.584" y="327.001"/>
+      <point name="br" x="1331.89" y="272.467"/>
+    </frame>
+    <frame index="40" rejected="false">
+      <point name="bl" x="1431.41" y="644.096"/>
+      <point name="tl" x="721.307" y="707.886"/>
+      <point name="tr" x="720.498" y="323.411"/>
+      <point name="br" x="1331.58" y="267.683"/>
+    </frame>
+    <frame index="41" rejected="false">
+      <point name="bl" x="1428.42" y="632.095"/>
+      <point name="tl" x="717.95" y="705.314"/>
+      <point name="tr" x="709.942" y="317.004"/>
+      <point name="br" x="1323.58" y="255.805"/>
+    </frame>
+    <frame index="42" rejected="false">
+      <point name="bl" x="1412.94" y="631.029"/>
+      <point name="tl" x="705.061" y="709.943"/>
+      <point name="tr" x="690.395" y="320.785"/>
+      <point name="br" x="1301.79" y="257.775"/>
+    </frame>
+    <frame index="43" rejected="false">
+      <point name="bl" x="1401.47" y="632.455"/>
+      <point name="tl" x="698.268" y="715.965"/>
+      <point name="tr" x="680.082" y="323.846"/>
+      <point name="br" x="1290.1" y="259.126"/>
+    </frame>
+    <frame index="44" rejected="false">
+      <point name="bl" x="1376.09" y="641.612"/>
+      <point name="tl" x="679.456" y="736.316"/>
+      <point name="tr" x="652.864" y="342.968"/>
+      <point name="br" x="1256.84" y="273.418"/>
+    </frame>
+    <frame index="45" rejected="false">
+      <point name="bl" x="1360.58" y="645.912"/>
+      <point name="tl" x="666.256" y="748.313"/>
+      <point name="tr" x="633.498" y="353.795"/>
+      <point name="br" x="1237.22" y="280.023"/>
+    </frame>
+    <frame index="46" rejected="false">
+      <point name="bl" x="1346.6" y="642.757"/>
+      <point name="tl" x="655.169" y="755.266"/>
+      <point name="tr" x="613.027" y="359.998"/>
+      <point name="br" x="1215.37" y="280.678"/>
+    </frame>
+    <frame index="47" rejected="false">
+      <point name="bl" x="1342.3" y="630.763"/>
+      <point name="tl" x="651.294" y="744.316"/>
+      <point name="tr" x="600.804" y="347.148"/>
+      <point name="br" x="1205.35" y="269.269"/>
+    </frame>
+    <frame index="48" rejected="false">
+      <point name="bl" x="1357.24" y="623.034"/>
+      <point name="tl" x="669.994" y="734.918"/>
+      <point name="tr" x="615.005" y="335.51"/>
+      <point name="br" x="1218.54" y="258.467"/>
+    </frame>
+    <frame index="49" rejected="false">
+      <point name="bl" x="1369.56" y="618.099"/>
+      <point name="tl" x="682.207" y="729.245"/>
+      <point name="tr" x="627.75" y="328.179"/>
+      <point name="br" x="1231.97" y="250.833"/>
+    </frame>
+    <frame index="50" rejected="false">
+      <point name="bl" x="1377.61" y="614.444"/>
+      <point name="tl" x="692.02" y="723.4"/>
+      <point name="tr" x="637.354" y="324.729"/>
+      <point name="br" x="1240.04" y="248.539"/>
+    </frame>
+    <frame index="51" rejected="false">
+      <point name="bl" x="1385.53" y="601.747"/>
+      <point name="tl" x="701.57" y="709.822"/>
+      <point name="tr" x="646.124" y="307.706"/>
+      <point name="br" x="1251.09" y="231.201"/>
+    </frame>
+    <frame index="52" rejected="false">
+      <point name="bl" x="1386.12" y="620.62"/>
+      <point name="tl" x="704.231" y="728.579"/>
+      <point name="tr" x="652.89" y="325.477"/>
+      <point name="br" x="1253.67" y="249.144"/>
+    </frame>
+    <frame index="53" rejected="false">
+      <point name="bl" x="1381.02" y="640.747"/>
+      <point name="tl" x="704.175" y="745.68"/>
+      <point name="tr" x="654.642" y="341.452"/>
+      <point name="br" x="1251.9" y="267.025"/>
+    </frame>
+    <frame index="54" rejected="false">
+      <point name="bl" x="1368.48" y="686.09"/>
+      <point name="tl" x="697.806" y="790.081"/>
+      <point name="tr" x="652.42" y="387.155"/>
+      <point name="br" x="1243.81" y="313.699"/>
+    </frame>
+    <frame index="55" rejected="false">
+      <point name="bl" x="1357.32" y="710.802"/>
+      <point name="tl" x="687.919" y="820.18"/>
+      <point name="tr" x="644.621" y="419.688"/>
+      <point name="br" x="1230.98" y="342.06"/>
+    </frame>
+    <frame index="56" rejected="false">
+      <point name="bl" x="1333.43" y="714.036"/>
+      <point name="tl" x="667.555" y="832.904"/>
+      <point name="tr" x="622.751" y="430.66"/>
+      <point name="br" x="1209.27" y="345.621"/>
+    </frame>
+    <frame index="57" rejected="false">
+      <point name="bl" x="1302.01" y="702.996"/>
+      <point name="tl" x="635.625" y="827.758"/>
+      <point name="tr" x="587.54" y="425.996"/>
+      <point name="br" x="1175.68" y="337.136"/>
+    </frame>
+    <frame index="58" rejected="false">
+      <point name="bl" x="1283.06" y="661.719"/>
+      <point name="tl" x="621.135" y="797.503"/>
+      <point name="tr" x="559.103" y="395.801"/>
+      <point name="br" x="1150.08" y="297.225"/>
+    </frame>
+    <frame index="59" rejected="false">
+      <point name="bl" x="1273.26" y="639.978"/>
+      <point name="tl" x="613.809" y="784.497"/>
+      <point name="tr" x="547.825" y="382.931"/>
+      <point name="br" x="1138.68" y="277.454"/>
+    </frame>
+    <frame index="60" rejected="false">
+      <point name="bl" x="1275.69" y="605.742"/>
+      <point name="tl" x="621.089" y="756.956"/>
+      <point name="tr" x="544.872" y="356.251"/>
+      <point name="br" x="1135.01" y="243.22"/>
+    </frame>
+    <frame index="61" rejected="false">
+      <point name="bl" x="1272.55" y="590.606"/>
+      <point name="tl" x="619.623" y="751.093"/>
+      <point name="tr" x="537.569" y="343.631"/>
+      <point name="br" x="1129.31" y="223.152"/>
+    </frame>
+    <frame index="62" rejected="false">
+      <point name="bl" x="1280.17" y="591.365"/>
+      <point name="tl" x="631.541" y="762.974"/>
+      <point name="tr" x="538.352" y="356.09"/>
+      <point name="br" x="1128.14" y="227.384"/>
+    </frame>
+    <frame index="63" rejected="false">
+      <point name="bl" x="1308.63" y="597.711"/>
+      <point name="tl" x="669.387" y="781.546"/>
+      <point name="tr" x="563.447" y="374.978"/>
+      <point name="br" x="1145.82" y="233.251"/>
+    </frame>
+    <frame index="64" rejected="false">
+      <point name="bl" x="1327.82" y="602.776"/>
+      <point name="tl" x="692.51" y="796.373"/>
+      <point name="tr" x="579.327" y="391.101"/>
+      <point name="br" x="1158.98" y="240.765"/>
+    </frame>
+    <frame index="65" rejected="false">
+      <point name="bl" x="1337.68" y="608.062"/>
+      <point name="tl" x="707.99" y="810.979"/>
+      <point name="tr" x="588.723" y="407.194"/>
+      <point name="br" x="1163.76" y="249.739"/>
+    </frame>
+    <frame index="66" rejected="false">
+      <point name="bl" x="1347.11" y="601.723"/>
+      <point name="tl" x="726.077" y="815.939"/>
+      <point name="tr" x="592.204" y="414.974"/>
+      <point name="br" x="1162.37" y="248.857"/>
+    </frame>
+    <frame index="67" rejected="false">
+      <point name="bl" x="1355.29" y="583.163"/>
+      <point name="tl" x="739.434" y="799.968"/>
+      <point name="tr" x="598.183" y="399.233"/>
+      <point name="br" x="1167.34" y="231.168"/>
+    </frame>
+    <frame index="68" rejected="false">
+      <point name="bl" x="1362.06" y="564.228"/>
+      <point name="tl" x="751.121" y="782.962"/>
+      <point name="tr" x="604.007" y="386.115"/>
+      <point name="br" x="1171.07" y="215.503"/>
+    </frame>
+    <frame index="69" rejected="false">
+      <point name="bl" x="1363.41" y="537.402"/>
+      <point name="tl" x="760.777" y="761.701"/>
+      <point name="tr" x="608.7" y="363.377"/>
+      <point name="br" x="1171.53" y="188.359"/>
+    </frame>
+    <frame index="70" rejected="false">
+      <point name="bl" x="1345.23" y="533.318"/>
+      <point name="tl" x="750.812" y="764.407"/>
+      <point name="tr" x="589.731" y="366.92"/>
+      <point name="br" x="1149.72" y="188.389"/>
+    </frame>
+    <frame index="71" rejected="false">
+      <point name="bl" x="1346.78" y="520.198"/>
+      <point name="tl" x="759.096" y="755.768"/>
+      <point name="tr" x="590.828" y="357.759"/>
+      <point name="br" x="1147.04" y="175.189"/>
+    </frame>
+    <frame index="72" rejected="false">
+      <point name="bl" x="1350.67" y="519.312"/>
+      <point name="tl" x="768.476" y="757.131"/>
+      <point name="tr" x="595.916" y="363.219"/>
+      <point name="br" x="1148.34" y="179.022"/>
+    </frame>
+    <frame index="73" rejected="false">
+      <point name="bl" x="1354.96" y="529.768"/>
+      <point name="tl" x="780.551" y="771.075"/>
+      <point name="tr" x="604.448" y="380.35"/>
+      <point name="br" x="1149.15" y="193.211"/>
+    </frame>
+    <frame index="74" rejected="false">
+      <point name="bl" x="1357.63" y="538.223"/>
+      <point name="tl" x="787.566" y="777.606"/>
+      <point name="tr" x="611.095" y="388.272"/>
+      <point name="br" x="1152.09" y="203.506"/>
+    </frame>
+    <frame index="75" rejected="false">
+      <point name="bl" x="1357.82" y="543.067"/>
+      <point name="tl" x="790.75" y="777.136"/>
+      <point name="tr" x="617.915" y="388.218"/>
+      <point name="br" x="1156.55" y="209.21"/>
+    </frame>
+    <frame index="76" rejected="false">
+      <point name="bl" x="1357.66" y="558.702"/>
+      <point name="tl" x="794.287" y="785.221"/>
+      <point name="tr" x="623.359" y="398.65"/>
+      <point name="br" x="1158.02" y="225.958"/>
+    </frame>
+    <frame index="77" rejected="false">
+      <point name="bl" x="1371.71" y="555.955"/>
+      <point name="tl" x="808.081" y="773.61"/>
+      <point name="tr" x="641.512" y="386.307"/>
+      <point name="br" x="1175.53" y="220.868"/>
+    </frame>
+    <frame index="78" rejected="false">
+      <point name="bl" x="1387.75" y="557.994"/>
+      <point name="tl" x="821.951" y="765.082"/>
+      <point name="tr" x="662.443" y="378.511"/>
+      <point name="br" x="1196.4" y="220.774"/>
+    </frame>
+    <frame index="79" rejected="false">
+      <point name="bl" x="1405.34" y="564.188"/>
+      <point name="tl" x="838.008" y="763.301"/>
+      <point name="tr" x="684.998" y="375.985"/>
+      <point name="br" x="1219.37" y="224.06"/>
+    </frame>
+    <frame index="80" rejected="false">
+      <point name="bl" x="1407.75" y="580.193"/>
+      <point name="tl" x="837.76" y="767.501"/>
+      <point name="tr" x="696.973" y="379.895"/>
+      <point name="br" x="1232.12" y="238.25"/>
+    </frame>
+    <frame index="81" rejected="false">
+      <point name="bl" x="1407.51" y="587.758"/>
+      <point name="tl" x="837.797" y="766.565"/>
+      <point name="tr" x="702.116" y="378.485"/>
+      <point name="br" x="1236.67" y="244.051"/>
+    </frame>
+    <frame index="82" rejected="false">
+      <point name="bl" x="1410.73" y="588.921"/>
+      <point name="tl" x="837.803" y="757.468"/>
+      <point name="tr" x="710.497" y="369.19"/>
+      <point name="br" x="1247.2" y="242.808"/>
+    </frame>
+    <frame index="83" rejected="false">
+      <point name="bl" x="1407.98" y="593.626"/>
+      <point name="tl" x="835.093" y="755.863"/>
+      <point name="tr" x="711.943" y="369.521"/>
+      <point name="br" x="1247.97" y="248.638"/>
+    </frame>
+    <frame index="84" rejected="false">
+      <point name="bl" x="1422.38" y="594.277"/>
+      <point name="tl" x="844.564" y="751.093"/>
+      <point name="tr" x="726.981" y="362.725"/>
+      <point name="br" x="1266.2" y="244.662"/>
+    </frame>
+    <frame index="85" rejected="false">
+      <point name="bl" x="1428.76" y="590.198"/>
+      <point name="tl" x="845.906" y="742.929"/>
+      <point name="tr" x="733.327" y="352.718"/>
+      <point name="br" x="1276.29" y="236.002"/>
+    </frame>
+    <frame index="86" rejected="false">
+      <point name="bl" x="1443.08" y="572.628"/>
+      <point name="tl" x="848.249" y="717.117"/>
+      <point name="tr" x="743.361" y="321.855"/>
+      <point name="br" x="1298.18" y="209.316"/>
+    </frame>
+    <frame index="87" rejected="false">
+      <point name="bl" x="1431.04" y="590.597"/>
+      <point name="tl" x="833.157" y="732.414"/>
+      <point name="tr" x="735.436" y="332.661"/>
+      <point name="br" x="1292.3" y="223.034"/>
+    </frame>
+    <frame index="88" rejected="false">
+      <point name="bl" x="1413.25" y="600.677"/>
+      <point name="tl" x="814.574" y="739.598"/>
+      <point name="tr" x="719.748" y="340.923"/>
+      <point name="br" x="1277.75" y="233.585"/>
+    </frame>
+    <frame index="89" rejected="false">
+      <point name="bl" x="1405.05" y="613.413"/>
+      <point name="tl" x="806.768" y="751.498"/>
+      <point name="tr" x="714.666" y="349.901"/>
+      <point name="br" x="1271.75" y="243.577"/>
+    </frame>
+    <frame index="90" rejected="false">
+      <point name="bl" x="1389.98" y="635.188"/>
+      <point name="tl" x="791.102" y="768.442"/>
+      <point name="tr" x="705.008" y="370.08"/>
+      <point name="br" x="1260.47" y="267.585"/>
+    </frame>
+    <frame index="91" rejected="false">
+      <point name="bl" x="1377.1" y="647.731"/>
+      <point name="tl" x="776.03" y="776.728"/>
+      <point name="tr" x="695.261" y="376.978"/>
+      <point name="br" x="1251.73" y="278.037"/>
+    </frame>
+    <frame index="92" rejected="false">
+      <point name="bl" x="1368.85" y="657.804"/>
+      <point name="tl" x="765.376" y="785.026"/>
+      <point name="tr" x="688.327" y="383.654"/>
+      <point name="br" x="1246.26" y="286.699"/>
+    </frame>
+    <frame index="93" rejected="false">
+      <point name="bl" x="1344.63" y="680.486"/>
+      <point name="tl" x="737.165" y="801.15"/>
+      <point name="tr" x="666.737" y="398.95"/>
+      <point name="br" x="1227.98" y="307.7"/>
+    </frame>
+    <frame index="94" rejected="false">
+      <point name="bl" x="1343.16" y="679.822"/>
+      <point name="tl" x="729.516" y="793.639"/>
+      <point name="tr" x="663.411" y="392.205"/>
+      <point name="br" x="1228.46" y="305.835"/>
+    </frame>
+    <frame index="95" rejected="false">
+      <point name="bl" x="1349.58" y="660.156"/>
+      <point name="tl" x="726.938" y="763.982"/>
+      <point name="tr" x="667.54" y="359.79"/>
+      <point name="br" x="1241.52" y="280.905"/>
+    </frame>
+    <frame index="96" rejected="false">
+      <point name="bl" x="1349.58" y="642.629"/>
+      <point name="tl" x="717.634" y="743.347"/>
+      <point name="tr" x="662.752" y="330.411"/>
+      <point name="br" x="1246.69" y="253.474"/>
+    </frame>
+    <frame index="97" rejected="false">
+      <point name="bl" x="1340.51" y="637.215"/>
+      <point name="tl" x="698.081" y="732.36"/>
+      <point name="tr" x="646.588" y="314.101"/>
+      <point name="br" x="1239.91" y="243.471"/>
+    </frame>
+    <frame index="98" rejected="false">
+      <point name="bl" x="1342.95" y="642.124"/>
+      <point name="tl" x="694.39" y="733.212"/>
+      <point name="tr" x="644.627" y="309.348"/>
+      <point name="br" x="1243.3" y="241.515"/>
+    </frame>
+    <frame index="99" rejected="false">
+      <point name="bl" x="1350.88" y="645.08"/>
+      <point name="tl" x="693.985" y="729.903"/>
+      <point name="tr" x="651.887" y="302.167"/>
+      <point name="br" x="1257.02" y="239.014"/>
+    </frame>
+    <frame index="100" rejected="false">
+      <point name="bl" x="1362.04" y="642.149"/>
+      <point name="tl" x="692.73" y="715.272"/>
+      <point name="tr" x="657.231" y="283.106"/>
+      <point name="br" x="1272.94" y="229.579"/>
+    </frame>
+    <frame index="101" rejected="false">
+      <point name="bl" x="1365.31" y="646.093"/>
+      <point name="tl" x="687.122" y="718.815"/>
+      <point name="tr" x="656.444" y="283.475"/>
+      <point name="br" x="1277.65" y="230.551"/>
+    </frame>
+    <frame index="102" rejected="false">
+      <point name="bl" x="1369.35" y="650.755"/>
+      <point name="tl" x="688.281" y="724.758"/>
+      <point name="tr" x="655.046" y="284.172"/>
+      <point name="br" x="1279.44" y="230.947"/>
+    </frame>
+    <frame index="103" rejected="false">
+      <point name="bl" x="1367.17" y="646.972"/>
+      <point name="tl" x="675.87" y="718.308"/>
+      <point name="tr" x="648.338" y="275.737"/>
+      <point name="br" x="1280.4" y="224.644"/>
+    </frame>
+    <frame index="104" rejected="false">
+      <point name="bl" x="1366.02" y="658.059"/>
+      <point name="tl" x="662.245" y="725.713"/>
+      <point name="tr" x="636.336" y="278.309"/>
+      <point name="br" x="1277.67" y="231.084"/>
+    </frame>
+    <frame index="105" rejected="false">
+      <point name="bl" x="1369.38" y="657.721"/>
+      <point name="tl" x="656.689" y="726.026"/>
+      <point name="tr" x="633.509" y="267.203"/>
+      <point name="br" x="1283.35" y="221.467"/>
+    </frame>
+    <frame index="106" rejected="false">
+      <point name="bl" x="1364.02" y="673.067"/>
+      <point name="tl" x="644.525" y="743.548"/>
+      <point name="tr" x="621.131" y="281.247"/>
+      <point name="br" x="1274.23" y="234.623"/>
+    </frame>
+    <frame index="107" rejected="false">
+      <point name="bl" x="1371.11" y="668.339"/>
+      <point name="tl" x="642.599" y="736.929"/>
+      <point name="tr" x="617.802" y="271.468"/>
+      <point name="br" x="1279.34" y="225.801"/>
+    </frame>
+    <frame index="108" rejected="false">
+      <point name="bl" x="1383.12" y="665.825"/>
+      <point name="tl" x="645.593" y="733.549"/>
+      <point name="tr" x="623.15" y="262.906"/>
+      <point name="br" x="1291.74" y="218.014"/>
+    </frame>
+    <frame index="109" rejected="false">
+      <point name="bl" x="1384.93" y="678.031"/>
+      <point name="tl" x="642.774" y="745.304"/>
+      <point name="tr" x="621.454" y="270.342"/>
+      <point name="br" x="1294.54" y="225.441"/>
+    </frame>
+    <frame index="110" rejected="false">
+      <point name="bl" x="1380.94" y="679.017"/>
+      <point name="tl" x="632.168" y="748.031"/>
+      <point name="tr" x="613.091" y="268.585"/>
+      <point name="br" x="1291.76" y="223.606"/>
+    </frame>
+    <frame index="111" rejected="false">
+      <point name="bl" x="1380.27" y="685.997"/>
+      <point name="tl" x="628.544" y="754.717"/>
+      <point name="tr" x="609.178" y="274.322"/>
+      <point name="br" x="1288.11" y="230.277"/>
+    </frame>
+    <frame index="112" rejected="false">
+      <point name="bl" x="1389.43" y="676.365"/>
+      <point name="tl" x="631.883" y="743.52"/>
+      <point name="tr" x="611.508" y="264.371"/>
+      <point name="br" x="1296.69" y="221.144"/>
+    </frame>
+    <frame index="113" rejected="false">
+      <point name="bl" x="1391.58" y="669.451"/>
+      <point name="tl" x="627.684" y="736.884"/>
+      <point name="tr" x="606.773" y="252.203"/>
+      <point name="br" x="1298.34" y="208.689"/>
+    </frame>
+    <frame index="114" rejected="false">
+      <point name="bl" x="1393.52" y="665.296"/>
+      <point name="tl" x="627.734" y="732.521"/>
+      <point name="tr" x="608.759" y="243.782"/>
+      <point name="br" x="1302.76" y="200.884"/>
+    </frame>
+    <frame index="115" rejected="false">
+      <point name="bl" x="1383.16" y="669.942"/>
+      <point name="tl" x="619.624" y="737.435"/>
+      <point name="tr" x="600.354" y="250.792"/>
+      <point name="br" x="1290.87" y="208.428"/>
+    </frame>
+    <frame index="116" rejected="false">
+      <point name="bl" x="1378.93" y="671.716"/>
+      <point name="tl" x="616.564" y="740.221"/>
+      <point name="tr" x="598.116" y="254.514"/>
+      <point name="br" x="1288.01" y="211.479"/>
+    </frame>
+    <frame index="117" rejected="false">
+      <point name="bl" x="1376.4" y="675.852"/>
+      <point name="tl" x="614.821" y="743.416"/>
+      <point name="tr" x="595.334" y="258.349"/>
+      <point name="br" x="1283.73" y="216.955"/>
+    </frame>
+    <frame index="118" rejected="false">
+      <point name="bl" x="1369.03" y="689.581"/>
+      <point name="tl" x="608.274" y="756.98"/>
+      <point name="tr" x="591.111" y="272.495"/>
+      <point name="br" x="1275.27" y="233.096"/>
+    </frame>
+    <frame index="119" rejected="false">
+      <point name="bl" x="1373.91" y="688.769"/>
+      <point name="tl" x="616.375" y="752.831"/>
+      <point name="tr" x="598.493" y="274.039"/>
+      <point name="br" x="1279.58" y="236.428"/>
+    </frame>
+    <frame index="120" rejected="false">
+      <point name="bl" x="1386.58" y="683.829"/>
+      <point name="tl" x="633.434" y="744.101"/>
+      <point name="tr" x="616.489" y="273.353"/>
+      <point name="br" x="1291.97" y="236.785"/>
+    </frame>
+    <frame index="121" rejected="false">
+      <point name="bl" x="1393.26" y="679.122"/>
+      <point name="tl" x="642.546" y="737.151"/>
+      <point name="tr" x="627.994" y="269.434"/>
+      <point name="br" x="1300.3" y="234.286"/>
+    </frame>
+    <frame index="122" rejected="false">
+      <point name="bl" x="1395.32" y="676.263"/>
+      <point name="tl" x="648.265" y="731.586"/>
+      <point name="tr" x="634.668" y="269.621"/>
+      <point name="br" x="1302.18" y="236.42"/>
+    </frame>
+    <frame index="123" rejected="false">
+      <point name="bl" x="1398.77" y="665.04"/>
+      <point name="tl" x="658.031" y="718.106"/>
+      <point name="tr" x="646.707" y="262.727"/>
+      <point name="br" x="1308.04" y="230.732"/>
+    </frame>
+    <frame index="124" rejected="false">
+      <point name="bl" x="1394.44" y="653.353"/>
+      <point name="tl" x="656.271" y="703.622"/>
+      <point name="tr" x="646.438" y="256.883"/>
+      <point name="br" x="1302.55" y="228.152"/>
+    </frame>
+    <frame index="125" rejected="false">
+      <point name="bl" x="1402.7" y="651.67"/>
+      <point name="tl" x="663.314" y="701.658"/>
+      <point name="tr" x="653.043" y="255.915"/>
+      <point name="br" x="1307.86" y="227.027"/>
+    </frame>
+    <frame index="126" rejected="false">
+      <point name="bl" x="1408.96" y="645.385"/>
+      <point name="tl" x="666.907" y="695.614"/>
+      <point name="tr" x="657.182" y="251.994"/>
+      <point name="br" x="1313.0" y="223.605"/>
+    </frame>
+    <frame index="127" rejected="false">
+      <point name="bl" x="1402.23" y="649.811"/>
+      <point name="tl" x="660.961" y="701.255"/>
+      <point name="tr" x="651.564" y="259.708"/>
+      <point name="br" x="1304.74" y="230.477"/>
+    </frame>
+    <frame index="128" rejected="false">
+      <point name="bl" x="1394.23" y="643.312"/>
+      <point name="tl" x="654.772" y="693.938"/>
+      <point name="tr" x="645.953" y="257.16"/>
+      <point name="br" x="1296.44" y="228.844"/>
+    </frame>
+    <frame index="129" rejected="false">
+      <point name="bl" x="1396.2" y="651.887"/>
+      <point name="tl" x="660.725" y="703.574"/>
+      <point name="tr" x="649.074" y="268.303"/>
+      <point name="br" x="1294.89" y="239.653"/>
+    </frame>
+    <frame index="130" rejected="false">
+      <point name="bl" x="1395.66" y="654.382"/>
+      <point name="tl" x="659.347" y="707.317"/>
+      <point name="tr" x="650.617" y="275.38"/>
+      <point name="br" x="1294.27" y="245.505"/>
+    </frame>
+    <frame index="131" rejected="false">
+      <point name="bl" x="1389.99" y="662.942"/>
+      <point name="tl" x="655.242" y="716.234"/>
+      <point name="tr" x="646.504" y="285.128"/>
+      <point name="br" x="1288.73" y="255.364"/>
+    </frame>
+    <frame index="132" rejected="false">
+      <point name="bl" x="1381.95" y="661.531"/>
+      <point name="tl" x="645.871" y="713.074"/>
+      <point name="tr" x="637.433" y="287.375"/>
+      <point name="br" x="1278.55" y="260.199"/>
+    </frame>
+    <frame index="133" rejected="false">
+      <point name="bl" x="1384.91" y="661.589"/>
+      <point name="tl" x="649.824" y="713.751"/>
+      <point name="tr" x="640.631" y="287.504"/>
+      <point name="br" x="1280.92" y="260.213"/>
+    </frame>
+    <frame index="134" rejected="false">
+      <point name="bl" x="1393.13" y="653.612"/>
+      <point name="tl" x="656.669" y="704.416"/>
+      <point name="tr" x="645.834" y="280.566"/>
+      <point name="br" x="1285.98" y="253.902"/>
+    </frame>
+    <frame index="135" rejected="false">
+      <point name="bl" x="1394.89" y="652.965"/>
+      <point name="tl" x="657.476" y="702.828"/>
+      <point name="tr" x="649.207" y="280.28"/>
+      <point name="br" x="1289.8" y="254.583"/>
+    </frame>
+    <frame index="136" rejected="false">
+      <point name="bl" x="1396.48" y="657.581"/>
+      <point name="tl" x="660.084" y="706.892"/>
+      <point name="tr" x="650.463" y="283.578"/>
+      <point name="br" x="1290.13" y="258.501"/>
+    </frame>
+    <frame index="137" rejected="false">
+      <point name="bl" x="1403.77" y="657.143"/>
+      <point name="tl" x="667.132" y="705.681"/>
+      <point name="tr" x="657.832" y="286.176"/>
+      <point name="br" x="1296.84" y="260.448"/>
+    </frame>
+  </segmentation_results>
+  <object_shape width="2100" height="2970"/>
+</ground_truth>
