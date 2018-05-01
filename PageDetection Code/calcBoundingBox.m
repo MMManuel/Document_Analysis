@@ -35,27 +35,6 @@ intersectionPoint4=lineintersect(vertcat(hLine2(1:2),vLine2(1:2)),vertcat(hLine2
 
 %return boundingBox
 boundingBox=horzcat(intersectionPoint1,intersectionPoint2,intersectionPoint3,intersectionPoint4);
-[order,area]=convhull(boundingBox(1,:),boundingBox(2,:));
-%boundingBox points in counterclockwise order
-boundingBox=horzcat(boundingBox(:,order(1)),boundingBox(:,order(2)),boundingBox(:,order(3)),boundingBox(:,order(4)));
-
-%check if horizontal lines have equal length also vertical lines
-lengthHorz1=sqrt(((boundingBox(1,1)-boundingBox(1,2)).^2+(boundingBox(2,1)-boundingBox(2,2)).^2));
-lengthHorz2=sqrt(((boundingBox(1,3)-boundingBox(1,4)).^2+(boundingBox(2,3)-boundingBox(2,4)).^2));
-if abs(lengthHorz1-lengthHorz2)>0.2*lengthHorz1
-    boundingBox=0;
-    return 
-end
-lengthVert1=sqrt(((boundingBox(1,1)-boundingBox(1,4)).^2+(boundingBox(2,1)-boundingBox(2,4)).^2));
-lengthVert2=sqrt(((boundingBox(1,2)-boundingBox(1,3)).^2+(boundingBox(2,2)-boundingBox(2,3)).^2));
-if abs(lengthVert1-lengthVert2)>0.2*lengthVert1
-    boundingBox=0;
-    return 
-end
-
-%calculate aspectratio
-%aspectRatio A4paper 1/sqrt(2)=0.707 querformat 1.414
-aspectRatio=lengthHorz1/lengthVert1;
 
 end
 
