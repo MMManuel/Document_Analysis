@@ -1,0 +1,47 @@
+function [ output_args ] = detectPageInVideo( input_args )
+%DETECTPAGEINVIDEO Summary of this function goes here
+%   Detailed explanation goes here
+    
+%% Load videframes
+imagePath='./images/myImage.jpg';
+v = VideoReader('..\page-detection\background04\paper004.avi');
+numberFrames=int16(v.Duration*v.FrameRate);
+
+%% Load ground truth of XML
+XMLStruct= parseXML('..\page-detection\background04\paper004.gt.xml');
+GroundTruthFrames=XMLStruct.Children(6).Children(2:2:numberFrames*2);
+% GroundTruth =[Frame,Zeilen X,Y, Spalte 1-4]
+GroundTruth= zeros(2,4,numberFrames);
+for i=1:numberFrames
+    for j=2:2:8
+        GroundTruth(1,j/2,i)= str2double(GroundTruthFrames(i).Children(j).Attributes(2).Value);
+        GroundTruth(2,j/2,i)=str2double(GroundTruthFrames(i).Children(j).Attributes(3).Value);
+    end
+end
+
+boundingBoxesVideo= zeros(2,4,numberFrames);
+
+
+frameNr=100;
+%for frameNr=1:numberFrames
+    
+    vImage=read(v,frameNr);
+    imwrite(vImage,imagePath);
+
+    %% Calculate BestBoundingBox
+    boundingBoxesVideo(:,:,frameNr)=detectPage(imagePath);
+%end
+
+ %% Calculate Jacard Index
+    jacardIndex= zeros(frameNr,1);
+    for frameNr=1:numberFrames
+        areaBB=poly2mask(boundingBoxesVideo(1,:,frameNr),boundingBoxesVideo(2,:,frameNr),v.Height,v.Width);
+        areaGT=poly2mask(GroundTruth(1,:,frameNr),GroundTruth(2,:,frameNr),v.Height,v.Width);
+        intersection= areaBB & areaGT;
+        union= areaBB | areaGT;
+        jacardIndex(frameNr)=sum(sum(int8(intersection)))/sum(sum(int8(union)));
+    end
+
+
+end
+

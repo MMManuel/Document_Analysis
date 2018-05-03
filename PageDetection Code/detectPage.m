@@ -14,10 +14,6 @@ minLengthPercentage = 0.10;
 %vImage = imbinarize(vImage,level);
 
 
-
-
-
-
 %% Show Image
 image = imread(ImagePath);
 image = rgb2gray(image);
@@ -72,7 +68,7 @@ linesHorizontal=lines(:,indicesHorizontal);
 linesVertical = mergeLines(linesVertical, margin);
 linesHorizontal = mergeLines(linesHorizontal, margin);
 
-plotReducedLines(image,linesHorizontal,linesVertical);
+%plotReducedLines(image,linesHorizontal,linesVertical);
 
 %% discard lines
 length=(linesVertical(1,:)-linesVertical(2,:)).^2+(linesVertical(3,:)-linesVertical(4,:)).^2;
@@ -83,7 +79,7 @@ length=(linesHorizontal(1,:)-linesHorizontal(2,:)).^2+(linesHorizontal(3,:)-line
 indices=find(length>maxLength);        %surrounding y2 removal
 linesHorizontal=linesHorizontal(:,indices);
 
-plotReducedLines(image,linesHorizontal,linesVertical);
+%plotReducedLines(image,linesHorizontal,linesVertical);
 
 %% compute bounding boxes
 
@@ -98,21 +94,20 @@ for hLines1=1:size(linesHorizontal,2)
                 vLine1 = linesVertical(1:4,vLines1);
                 vLine2 = linesVertical(1:4,vLines2);
                  
-                 if (edgesSharePoint(hLine1, vLine1, quadMargin) & ... 
-                     edgesSharePoint(hLine1, vLine2, quadMargin) & ...
-                     edgesSharePoint(hLine2, vLine1, quadMargin) & ... 
-                     edgesSharePoint(hLine2, vLine2, quadMargin) )
+                if (edgesSharePoint(hLine1, vLine1, quadMargin) & ... 
+                    edgesSharePoint(hLine1, vLine2, quadMargin) & ...
+                    edgesSharePoint(hLine2, vLine1, quadMargin) & ... 
+                    edgesSharePoint(hLine2, vLine2, quadMargin) )
                         i = i+1;
-                        boundingBoxes(i, :, :) = calcBoundingBox(hLine1,hLine2,vLine1,vLine2);
-                 end
+                        boundingBoxes(:, :,i) = calcBoundingBox(hLine1,hLine2,vLine1,vLine2);
+                end
             end
         end
     end
 end
 
-%plotBBs(image,boundingBoxes
 if size(boundingBoxes, 1) == 0
-    i = 0;
+   i = 0;
     for hLines1=1:size(linesHorizontal,2)
         for hLines2=hLines1+1:size(linesHorizontal,2)
             for vLines1=1:size(linesVertical,2)
@@ -122,21 +117,29 @@ if size(boundingBoxes, 1) == 0
                     vLine1 = linesVertical(1:4,vLines1);
                     vLine2 = linesVertical(1:4,vLines2);
                     i = i+1;
-                    boundingBoxes(i, :, :) = calcBoundingBox(hLine1,hLine2,vLine1,linesVertical(1:4,vLines2));
+                    boundingBoxes(:, :,i) = calcBoundingBox(hLine1,hLine2,vLine1,linesVertical(1:4,vLines2));
                 end
             end
         end
 
     end
 end
+
+%plotBBs(image,boundingBoxes)
+
 % choose best quad
 maxArea = 0;
-bestBoundingBox = [];
+bestBoundingBox = zeros(2,4);
 areaLimit = img_width * img_height * maxAreaPercentage;
 
-for i = 1:size(boundingBoxes,1)
+%No Bounding Box Found
+if isempty(boundingBoxes)
+    return;
+end
+
+for i = 1:size(boundingBoxes,3)
     % reorder corner points
-    boundingBox = reshape(boundingBoxes(i, :, :), [2 4]);
+    boundingBox = boundingBoxes(:, :,i);
     [order,area]=convhull(boundingBox(1,:),boundingBox(2,:));
     %boundingBox points in counterclockwise order
     boundingBox=horzcat(boundingBox(:,order(1)),boundingBox(:,order(2)),boundingBox(:,order(3)),boundingBox(:,order(4)));
@@ -202,8 +205,8 @@ end
 
 
 % plot the lines.
-plotReducedLines(image,linesHorizontal,linesVertical);
-plotBB(image,bestBoundingBox);
+%plotReducedLines(image,linesHorizontal,linesVertical);
+%plotBB(image,bestBoundingBox);
 
 end
 
@@ -243,7 +246,7 @@ function [] = plotBBs(image,boundingBoxes)
     imshow(image);
     hold on; 
     for i=1:size(boundingBoxes,1)
-        plot(boundingBoxes(i,1,:), boundingBoxes(i,2,:), 'LineWidth', 3, 'Color', [0, 0, 1]);
+        plot(boundingBoxes(1,:,i), boundingBoxes(2,:,i), 'LineWidth', 3, 'Color', [0, 0, 1]);
     end
     hold off;
 end
