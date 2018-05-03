@@ -5,6 +5,9 @@ function  newLines  = mergeLines( lines, margin )
 numLines = size(lines,2);
 
 for hLines=1:size(lines,2)
+    
+    if lines(5, hLines) == 0 continue; end
+    
     found = 1;
     
     foundLines = [lines(:, hLines)];
@@ -59,7 +62,7 @@ for hLines=1:size(lines,2)
     maxY = max(foundLines(maxXI + 2,maxXI_R));
     
     lines(:, hLines) =  [minX maxX minY maxY max(foundLines(5,:))];
-    %[min(min(foundLines(1,:)),min(foundLines(2,:))) max(max(foundLines(1,:)),max(foundLines(2,:)))...
+    %+[min(min(foundLines(1,:)),min(foundLines(2,:))) max(max(foundLines(1,:)),max(foundLines(2,:)))...
     %     min(min(foundLines(3,:)),min(foundLines(4,:))) max(max(foundLines(3,:)),max(foundLines(4,:))) max(foundLines(5,:))];
     
 end

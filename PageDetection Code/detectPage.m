@@ -14,8 +14,24 @@ minLengthPercentage = 0.10;
 %vImage = imbinarize(vImage,level);
 
 
+
+
+
+
 %% Show Image
 image = imread(ImagePath);
+image = rgb2gray(image);
+image = edge(image);
+% se = strel('line',5,90);
+% image = imdilate(image, se);
+% image = imdilate(image, se);
+% image = imdilate(image, se);
+% image = imerode(image, se);
+% image = imerode(image, se);
+% image = imerode(image, se);
+
+
+imwrite(image, ImagePath);
 
 %% get the start_points and end_points of each straight line use LSD.
 lines = lsd(ImagePath);
@@ -71,18 +87,37 @@ for hLines1=1:size(linesHorizontal,2)
                 vLine1 = linesVertical(1:4,vLines1);
                 vLine2 = linesVertical(1:4,vLines2);
                  
-%                 if (edgesSharePoint(hLine1, vLine1, quadMargin) & ... 
-%                     edgesSharePoint(hLine1, vLine2, quadMargin) & ...
-%                     edgesSharePoint(hLine2, vLine1, quadMargin) & ... 
-%                     edgesSharePoint(hLine2, vLine2, quadMargin) )
+                 if (edgesSharePoint(hLine1, vLine1, quadMargin) & ... 
+                     edgesSharePoint(hLine1, vLine2, quadMargin) & ...
+                     edgesSharePoint(hLine2, vLine1, quadMargin) & ... 
+                     edgesSharePoint(hLine2, vLine2, quadMargin) )
                 i = i+1;
                 boundingBoxes(i, :, :) = calcBoundingBox(hLine1,hLine2,vLine1,linesVertical(1:4,vLines2));
-%                 end
+                 end
             end
         end
     end
 end
 
+
+if size(boundingBoxes, 1) == 0
+    i = 0;
+    for hLines1=1:size(linesHorizontal,2)
+        for hLines2=hLines1+1:size(linesHorizontal,2)
+            for vLines1=1:size(linesVertical,2)
+                for vLines2=vLines1+1:size(linesVertical,2)
+                    hLine1 = linesHorizontal(1:4,hLines1);
+                    hLine2 = linesHorizontal(1:4,hLines2);
+                    vLine1 = linesVertical(1:4,vLines1);
+                    vLine2 = linesVertical(1:4,vLines2);
+                    i = i+1;
+                    boundingBoxes(i, :, :) = calcBoundingBox(hLine1,hLine2,vLine1,linesVertical(1:4,vLines2));
+                end
+            end
+        end
+
+    end
+end
 % choose best quad
 maxArea = 0;
 bestBoundingBox = [];
@@ -125,7 +160,7 @@ for i = 1:size(boundingBoxes,1)
     
     angles = sum(vectors .* -circshift(vectors, 1, 2), 1);
     
-    if any(angles < -0.35) || any(angles > 0.35) 
+    if any(angles < -0.15) || any(angles > 0.15) 
         continue;
     end
     
