@@ -7,14 +7,6 @@ maxLength = 3000;
 maxAreaPercentage = 0.20;
 minLengthPercentage = 0.10;
 
-%%
-
-%vImage = rgb2gray(vImage);
-%level = graythresh(vImage);
-%vImage = imbinarize(vImage,level);
-
-
-%% Show Image
 image = imread(ImagePath);
 image = rgb2gray(image);
 image = edge(image);
@@ -43,19 +35,6 @@ indices=find(length> ( img_width + img_height)/2 * minLengthPercentage & ...    
     lines(3,:)<img_height*0.9 & lines(3,:)>img_height*0.1 & ...    %surrounding y1 removal
     lines(4,:)<img_height*0.9 & lines(4,:)>img_height*0.1);        %surrounding y2 removal
 lines=lines(:,indices);
-
-%  imshow(image);
-%     hold on;
-%             %plot original lines
-%             for i = 1:size(lines, 2)
-%                 plot(lines(1:2, i), lines(3:4, i), 'LineWidth', lines(5, i) / 2, 'Color', [1, 0, 0]);
-%             end
-
-
-% labImage = rgb2lab(image);
-% lImage = uint8(labImage(:,:,1));
-% hisImage=histeq(lImage);
-% grayImage=rgb2gray(image);
 
 % group lines
 indicesVertical=find(abs(lines(1,:)-lines(2,:))./abs(lines(3,:)-lines(4,:))<1);
@@ -117,7 +96,7 @@ if size(boundingBoxes, 1) == 0
                     vLine1 = linesVertical(1:4,vLines1);
                     vLine2 = linesVertical(1:4,vLines2);
                     i = i+1;
-                    boundingBoxes(:, :,i) = calcBoundingBox(hLine1,hLine2,vLine1,linesVertical(1:4,vLines2));
+                    boundingBoxes(:, :,i) = calcBoundingBox(hLine1,hLine2,vLine1,vLine2);
                 end
             end
         end
