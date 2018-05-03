@@ -1,15 +1,20 @@
+% ImagePath='./images/myImage.jpg';
+% v = VideoReader('./video/datasheet001.avi');
+% vImage=read(v,10);
+% imwrite(vImage, ImagePath);
+
 function [ bestBoundingBox ] = detectPage( ImagePath )
 %% parameters
 
 margin = 10;
-quadMargin = 50;
+quadMargin = 10;
 maxLength = 3000;
 maxAreaPercentage = 0.20;
 minLengthPercentage = 0.10;
 
 image = imread(ImagePath);
 image = rgb2gray(image);
-image = edge(image);
+image = edge(image, 'canny');
 % se = strel('line',5,90);
 % image = imdilate(image, se);
 % image = imdilate(image, se);
@@ -73,6 +78,23 @@ for hLines1=1:size(linesHorizontal,2)
                 vLine1 = linesVertical(1:4,vLines1);
                 vLine2 = linesVertical(1:4,vLines2);
                  
+                minXV1 = min(min(vLine1(1),vLine1(2)),min(vLine2(1),vLine2(2)));
+                maxXV2 = max(max(vLine1(1),vLine1(2)),max(vLine2(1),vLine2(2)));
+                
+                minYH1 = min(min(hLine1(3),hLine1(4)),min(hLine2(3),hLine2(4)));
+                maxYH2 = max(max(hLine1(3),hLine1(4)),max(hLine2(3),hLine2(4)));
+                
+                if hLine1(1) < minXV1 && hLine1(2) < minXV1  || ... % both x coords are smaller than min x, edge is outside of vertical lines
+                        hLine1(1) > maxXV2 && hLine1(2) > maxXV2 || ...
+                        hLine2(1) < minXV1 && hLine2(2) < minXV1  || ... 
+                        hLine2(1) > maxXV2 && hLine2(2) > maxXV2 || ...
+                        vLine1(3) < minYH1 && vLine1(4) < minYH1  || ... % both y coords are smaller than min y, edge is outside of horizontal lines
+                        vLine1(3) > maxYH2 && vLine1(4) > maxYH2 || ...
+                        vLine2(3) < minYH1 && vLine2(4) < minYH1  || ... 
+                        vLine2(3) > maxYH2 && vLine2(4) > maxYH2
+                        continue;
+                end
+                
                 if (edgesSharePoint(hLine1, vLine1, quadMargin) & ... 
                     edgesSharePoint(hLine1, vLine2, quadMargin) & ...
                     edgesSharePoint(hLine2, vLine1, quadMargin) & ... 
@@ -95,6 +117,24 @@ if size(boundingBoxes, 1) == 0
                     hLine2 = linesHorizontal(1:4,hLines2);
                     vLine1 = linesVertical(1:4,vLines1);
                     vLine2 = linesVertical(1:4,vLines2);
+                    
+                    minXV1 = min(min(vLine1(1),vLine1(2)),min(vLine2(1),vLine2(2)));
+                    maxXV2 = max(max(vLine1(1),vLine1(2)),max(vLine2(1),vLine2(2)));
+
+                    minYH1 = min(min(hLine1(3),hLine1(4)),min(hLine2(3),hLine2(4)));
+                    maxYH2 = max(max(hLine1(3),hLine1(4)),max(hLine2(3),hLine2(4)));
+                    
+                     if hLine1(1) < minXV1 && hLine1(2) < minXV1  || ... % both x coords are smaller than min x, edge is outside of vertical lines
+                        hLine1(1) > maxXV2 && hLine1(2) > maxXV2 || ...
+                        hLine2(1) < minXV1 && hLine2(2) < minXV1  || ... 
+                        hLine2(1) > maxXV2 && hLine2(2) > maxXV2 || ...
+                        vLine1(3) < minYH1 && vLine1(4) < minYH1  || ... % both y coords are smaller than min y, edge is outside of horizontal lines
+                        vLine1(3) > maxYH2 && vLine1(4) > maxYH2 || ...
+                        vLine2(3) < minYH1 && vLine2(4) < minYH1  || ... 
+                        vLine2(3) > maxYH2 && vLine2(4) > maxYH2
+                        continue;
+                    end
+                    
                     i = i+1;
                     boundingBoxes(:, :,i) = calcBoundingBox(hLine1,hLine2,vLine1,vLine2);
                 end
@@ -128,11 +168,13 @@ for i = 1:size(boundingBoxes,3)
     lengthHorz1=sqrt(((boundingBox(1,1)-boundingBox(1,2)).^2+(boundingBox(2,1)-boundingBox(2,2)).^2));
     lengthHorz2=sqrt(((boundingBox(1,3)-boundingBox(1,4)).^2+(boundingBox(2,3)-boundingBox(2,4)).^2));
     if abs(lengthHorz1-lengthHorz2)>0.2*lengthHorz1
+        %disp('horz length');
         %continue;
     end
     lengthVert1=sqrt(((boundingBox(1,1)-boundingBox(1,4)).^2+(boundingBox(2,1)-boundingBox(2,4)).^2));
     lengthVert2=sqrt(((boundingBox(1,2)-boundingBox(1,3)).^2+(boundingBox(2,2)-boundingBox(2,3)).^2));
     if abs(lengthVert1-lengthVert2)>0.2*lengthVert1
+        %disp('vert length');
         %continue;
     end
     
@@ -144,6 +186,7 @@ for i = 1:size(boundingBoxes,3)
     
     if (aspectRatio < a4AR-0.25 || aspectRatio > a4AR+0.25) && ...
         (aspectRatio < 1/a4AR-0.25 || aspectRatio > 1/a4AR+0.25)
+        %disp('aspectRatio');
         continue;
     end
     
@@ -154,6 +197,7 @@ for i = 1:size(boundingBoxes,3)
     angles = sum(vectors .* -circshift(vectors, 1, 2), 1);
     
     if any(angles < -0.15) || any(angles > 0.15) 
+        %disp('angle');
         continue;
     end
     
@@ -184,8 +228,8 @@ end
 
 
 % plot the lines.
-%plotReducedLines(image,linesHorizontal,linesVertical);
-%plotBB(image,bestBoundingBox);
+% plotReducedLines(image,linesHorizontal,linesVertical);
+% plotBB(image,bestBoundingBox);
 
 end
 
