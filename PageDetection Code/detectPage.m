@@ -1,6 +1,6 @@
 % ImagePath='./images/myImage.jpg';
-% v = VideoReader('./video/datasheet001.avi');
-% vImage=read(v,10);
+% v = VideoReader('..\page-detection\background01\datasheet002.avi');
+% vImage=read(v,21);
 % imwrite(vImage, ImagePath);
 
 function [ bestBoundingBox ] = detectPage( ImagePath )
@@ -153,7 +153,7 @@ areaLimit = img_width * img_height * maxAreaPercentage;
 
 %No Bounding Box Found
 if isempty(boundingBoxes)
-    disp(['No bounding box found for' ImagePath]);
+    disp('error, no bb')
     return;
 end
 
@@ -197,7 +197,7 @@ for i = 1:size(boundingBoxes,3)
     
     angles = sum(vectors .* -circshift(vectors, 1, 2), 1);
     
-    if any(angles < -0.15) || any(angles > 0.15) 
+    if any(angles < -0.25) || any(angles > 0.25) 
         %disp('angle');
         continue;
     end
@@ -229,8 +229,8 @@ end
 
 
 % plot the lines.
-% plotReducedLines(image,linesHorizontal,linesVertical);
-% plotBB(image,bestBoundingBox);
+%plotReducedLines(image,linesHorizontal,linesVertical);
+%plotBB(image,bestBoundingBox);
 
 end
 
