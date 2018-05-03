@@ -1,3 +1,4 @@
+close all;
 %% Load videframes
 ImagePath='./images/myImage.jpg';
 v = VideoReader('..\page-detection\background01\datasheet001.avi');
@@ -15,7 +16,7 @@ for i=1:numberFrames
     end
 end
 
-frameNr=1;
+frameNr=2;
 %for frameNr=1:numberFrames
     
     vImage=read(v,frameNr);
