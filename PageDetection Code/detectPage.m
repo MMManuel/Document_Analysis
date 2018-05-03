@@ -153,6 +153,7 @@ areaLimit = img_width * img_height * maxAreaPercentage;
 
 %No Bounding Box Found
 if isempty(boundingBoxes)
+    disp(['No bounding box found for' ImagePath]);
     return;
 end
 
