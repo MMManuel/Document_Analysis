@@ -20,6 +20,8 @@ image = imread(ImagePath);
 %% get the start_points and end_points of each straight line use LSD.
 lines = lsd(ImagePath);
 
+ 
+
 img_width=size(image,2);
 img_height=size(image,1);
 length=(lines(1,:)-lines(2,:)).^2+(lines(3,:)-lines(4,:)).^2;
@@ -29,6 +31,13 @@ indices=find(length> ( img_width + img_height)/2 * minLengthPercentage & ...    
     lines(3,:)<img_height*0.9 & lines(3,:)>img_height*0.1 & ...    %surrounding y1 removal
     lines(4,:)<img_height*0.9 & lines(4,:)>img_height*0.1);        %surrounding y2 removal
 lines=lines(:,indices);
+
+%  imshow(image);
+%     hold on;
+%             %plot original lines
+%             for i = 1:size(lines, 2)
+%                 plot(lines(1:2, i), lines(3:4, i), 'LineWidth', lines(5, i) / 2, 'Color', [1, 0, 0]);
+%             end
 
 
 % labImage = rgb2lab(image);
@@ -47,8 +56,9 @@ linesHorizontal=lines(:,indicesHorizontal);
 linesVertical = mergeLines(linesVertical, margin);
 linesHorizontal = mergeLines(linesHorizontal, margin);
 
-%% discard lines
+plotReducedLines(image,linesHorizontal,linesVertical);
 
+%% discard lines
 length=(linesVertical(1,:)-linesVertical(2,:)).^2+(linesVertical(3,:)-linesVertical(4,:)).^2;
 indices=find(length>maxLength);        %surrounding y2 removal
 linesVertical=linesVertical(:,indices);
@@ -57,6 +67,7 @@ length=(linesHorizontal(1,:)-linesHorizontal(2,:)).^2+(linesHorizontal(3,:)-line
 indices=find(length>maxLength);        %surrounding y2 removal
 linesHorizontal=linesHorizontal(:,indices);
 
+plotReducedLines(image,linesHorizontal,linesVertical);
 
 %% compute bounding boxes
 
@@ -75,13 +86,15 @@ for hLines1=1:size(linesHorizontal,2)
 %                     edgesSharePoint(hLine1, vLine2, quadMargin) & ...
 %                     edgesSharePoint(hLine2, vLine1, quadMargin) & ... 
 %                     edgesSharePoint(hLine2, vLine2, quadMargin) )
-                i = i+1;
-                boundingBoxes(i, :, :) = calcBoundingBox(hLine1,hLine2,vLine1,linesVertical(1:4,vLines2));
+                        i = i+1;
+                        boundingBoxes(i, :, :) = calcBoundingBox(hLine1,hLine2,vLine1,vLine2);
 %                 end
             end
         end
     end
 end
+
+%plotBBs(image,boundingBoxes)
 
 % choose best quad
 maxArea = 0;
@@ -156,22 +169,48 @@ end
 
 
 % plot the lines.
-plotBB(image,linesHorizontal,linesVertical,bestBoundingBox);
+plotReducedLines(image,linesHorizontal,linesVertical);
+plotBB(image,bestBoundingBox);
 
 end
 
-function [] = plotBB(image,linesHorizontal,linesVertical,bestBoundingBox)
+function [] =plotOriginalLines(image,lines)
+    figure; 
     imshow(image);
     hold on;
-            %plot original lines
-            % for i = 1:size(lines, 2)
-            %     plot(lines(1:2, i), lines(3:4, i), 'LineWidth', lines(5, i) / 2, 'Color', [1, 0, 0]);
-            % end
+    for i = 1:size(lines, 2)
+        plot(lines(1:2, i), lines(3:4, i), 'LineWidth', lines(5, i) / 2, 'Color', [1, 0, 0]);
+    end
+    hold off;
+end
+
+function [] = plotReducedLines(image,linesHorizontal,linesVertical)
+    figure;
+        imshow(image);
+    hold on;
     for i = 1:size(linesHorizontal, 2)
         plot(linesHorizontal(1:2, i), linesHorizontal(3:4, i), 'LineWidth', linesHorizontal(5, i) / 2, 'Color', [1, 0, 0]);
     end
     for i = 1:size(linesVertical, 2)
         plot(linesVertical(1:2, i), linesVertical(3:4, i), 'LineWidth', linesVertical(5, i) / 2, 'Color', [1, 0, 0]);
     end
+    hold off;
+end
+
+function [] = plotBB(image,bestBoundingBox)
+    figure;
+    imshow(image);
+    hold on; 
     plot(bestBoundingBox(1,:), bestBoundingBox(2,:), 'LineWidth', 3, 'Color', [0, 0, 1]);
+    hold off;
+end
+
+function [] = plotBBs(image,boundingBoxes)
+    figure;
+    imshow(image);
+    hold on; 
+    for i=1:size(boundingBoxes,1)
+        plot(boundingBoxes(i,1,:), boundingBoxes(i,2,:), 'LineWidth', 3, 'Color', [0, 0, 1]);
+    end
+    hold off;
 end
