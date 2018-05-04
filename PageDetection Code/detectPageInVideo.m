@@ -7,7 +7,7 @@ function [ jacardIndex ] = detectPageInVideo( videoPath,xmlPath )
 %  jacardIndex of the video := Average of the frame jacardindices
     
 %% init
-stepSize = 20;
+stepSize = 2;
 
 %% Load videframes
 imagePath='./images/myImage.jpg';
@@ -26,14 +26,14 @@ for i=1:numberFrames
     end
 end
 
-boundingBoxesVideo= zeros(2,4,numberFrames/stepSize);
-areaBBVideo=zeros(numberFrames/stepSize);
+boundingBoxesVideo= zeros(2,4,numberFrames);
+areaBBVideo=zeros(numberFrames,1);
 
 
 %%%%%%%%%%%%
-    vImage=read(v,22);
-    imwrite(vImage,imagePath);
-    detectPage(imagePath);
+%     vImage=read(v,202);
+%     imwrite(vImage,imagePath);
+%     detectPage(imagePath);
 %%%%%%%%%%%%%%
 
 
@@ -44,19 +44,55 @@ for frameNr=1:stepSize:numberFrames
     imwrite(vImage,imagePath);
 
     %% Calculate BestBoundingBox
-    
-    [boundingBoxesVideo(:,:,round(frameNr/stepSize)+1),angleOfMaxArea,maxArea(round(frameNr/stepSize)+1)]=detectPage(imagePath);
+    [boundingBoxesVideo(:,:,frameNr),areaBBVideo(frameNr)]=detectPage(imagePath);
+end
+
+%% Interpolate between Frames
+averageArea=0;
+counter=0;
+
+
+for i=1:stepSize:length(boundingBoxesVideo)
+    if areaBBVideo(i)~=0
+        counter=counter+1;
+        averageArea=averageArea+areaBBVideo(i);
+    end
+end
+averageArea=averageArea/counter;
+
+for frameNr=1:numberFrames 
+    if frameNr==221
+    hi=0;
+    end
+    atTheEnd=true;
+    if(areaBBVideo(frameNr)<averageArea*0.7)
+        for i=frameNr+1:numberFrames
+             if(areaBBVideo(i)>averageArea*0.7)
+                 boundingBoxesVideo(:,:,frameNr)=boundingBoxesVideo(:,:,i);
+                 atTheEnd=false;
+                 break;
+             end
+        end
+        %if the last ones habe no values go in the other direction
+        if atTheEnd
+            for i=frameNr-1:-1:1
+             if(areaBBVideo(i)>averageArea*0.7)
+                 boundingBoxesVideo(:,:,frameNr)=boundingBoxesVideo(:,:,i);
+                 break;
+             end
+        end
+        end
+    end
 end
 
  %% Calculate Jacard Index
-    jacardIndexFrames= zeros(frameNr/stepSize,1);
-    for frameNr=1:stepSize:numberFrames
-        index = round(frameNr/stepSize)+1;
-        areaBB=poly2mask(boundingBoxesVideo(1,:,index),boundingBoxesVideo(2,:,index),v.Height,v.Width);
+    jacardIndexFrames= zeros(frameNr,1);
+    for frameNr=1:numberFrames
+        areaBB=poly2mask(boundingBoxesVideo(1,:,frameNr),boundingBoxesVideo(2,:,frameNr),v.Height,v.Width);
         areaGT=poly2mask(GroundTruth(1,:,frameNr),GroundTruth(2,:,frameNr),v.Height,v.Width);
         intersection= areaBB & areaGT;
         union= areaBB | areaGT;
-        jacardIndexFrames(index)=sum(sum(int8(intersection)))/sum(sum(int8(union)));
+        jacardIndexFrames(frameNr)=sum(sum(int8(intersection)))/sum(sum(int8(union)));
     end
     
     
@@ -66,6 +102,6 @@ end
     jacardIndex=sum(jacardIndexFrames)/length(jacardIndexFrames);
 
     disp([videoPath ' ' num2str(jacardIndex)])
-    [double(1:stepSize:numberFrames); jacardIndexFrames']'
+    [double(1:1:numberFrames); jacardIndexFrames']'
 end
 

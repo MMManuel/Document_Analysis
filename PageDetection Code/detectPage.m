@@ -3,7 +3,7 @@
 % vImage=read(v,21);
 % imwrite(vImage, ImagePath);
 
-function [ bestBoundingBox,angleOfMaxArea,maxArea ] = detectPage( ImagePath )
+function [ bestBoundingBox,maxArea ] = detectPage( ImagePath )
 %% parameters
 
 margin = 10;
@@ -153,7 +153,6 @@ end
 
 % choose best quad
 maxArea = 0;
-angleOfMaxArea=[0 0 0 0];
 bestBoundingBox = zeros(2,4);
 areaLimit = img_width * img_height * maxAreaPercentage;
 
@@ -164,8 +163,12 @@ if isempty(boundingBoxes)
 end
 
 for i = 1:size(boundingBoxes,3)
+    if i==5
+    hi=0;
+    end
     % reorder corner points
     boundingBox = boundingBoxes(:, :,i);
+    %plotBB(image,boundingBox,linesHorizontal,linesVertical);
     [order,area]=convhull(boundingBox(1,:),boundingBox(2,:));
     %boundingBox points in counterclockwise order
     boundingBox=horzcat(boundingBox(:,order(1)),boundingBox(:,order(2)),boundingBox(:,order(3)),boundingBox(:,order(4)));
@@ -203,14 +206,13 @@ for i = 1:size(boundingBoxes,3)
     
     angles = sum(vectors .* -circshift(vectors, 1, 2), 1);
     
-    if any(angles < -0.3) || any(angles > 0.3) 
+    if any(angles < -0.44) || any(angles > 0.44) 
         continue;
     end
     
     
     if area > maxArea && area < areaLimit
         maxArea = area;
-        angleOfMaxArea=angles;
         bestBoundingBox = boundingBox;
     end
 end
