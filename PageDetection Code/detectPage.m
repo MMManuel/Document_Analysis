@@ -3,7 +3,7 @@
 % vImage=read(v,21);
 % imwrite(vImage, ImagePath);
 
-function [ bestBoundingBox,maxArea ] = detectPage( ImagePath )
+function [ bestBoundingBox,maxArea ] = detectPage( vImage )
 %% parameters
 
 margin = 10;
@@ -11,11 +11,13 @@ quadMargin = 50;
 maxLength = 3000;
 maxAreaPercentage = 0.20;
 minLengthPercentage = 0.10;
+imagePath='./images/myImage.jpg';
 
-image = imread(ImagePath);
+image = vImage;
 image = rgb2gray(image);
 
-image = edge(image, 'canny');
+image = edge(image, 'canny',[],3 );
+imwrite(image,imagePath);
 % se = strel('line',5,90);
 % image = imdilate(image, se);
 % image = imdilate(image, se);
@@ -27,7 +29,7 @@ image = edge(image, 'canny');
 
 
 %% get the start_points and end_points of each straight line use LSD.
-lines = lsd(ImagePath);
+lines = lsd(imagePath);
 
  
 

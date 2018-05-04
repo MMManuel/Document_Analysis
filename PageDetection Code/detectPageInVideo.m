@@ -10,7 +10,7 @@ function [ jacardIndex ] = detectPageInVideo( videoPath,xmlPath )
 stepSize = 2;
 
 %% Load videframes
-imagePath='./images/myImage.jpg';
+
 v = VideoReader(videoPath);
 numberFrames=int16(v.Duration*v.FrameRate);
 
@@ -31,7 +31,7 @@ areaBBVideo=zeros(numberFrames,1);
 
 
 %%%%%%%%%%%%
-%     vImage=read(v,202);
+%     vImage=read(v,118);
 %     imwrite(vImage,imagePath);
 %     detectPage(imagePath);
 %%%%%%%%%%%%%%
@@ -41,10 +41,9 @@ areaBBVideo=zeros(numberFrames,1);
 for frameNr=1:stepSize:numberFrames
     
     vImage=read(v,frameNr);
-    imwrite(vImage,imagePath);
 
     %% Calculate BestBoundingBox
-    [boundingBoxesVideo(:,:,frameNr),areaBBVideo(frameNr)]=detectPage(imagePath);
+    [boundingBoxesVideo(:,:,frameNr),areaBBVideo(frameNr)]=detectPage(vImage);
 end
 
 %% Interpolate between Frames
@@ -102,6 +101,6 @@ end
     jacardIndex=sum(jacardIndexFrames)/length(jacardIndexFrames);
 
     disp([videoPath ' ' num2str(jacardIndex)])
-    [double(1:1:numberFrames); jacardIndexFrames']'
+    [double(1:stepSize:numberFrames); jacardIndexFrames(1:stepSize:numberFrames)']'
 end
 
