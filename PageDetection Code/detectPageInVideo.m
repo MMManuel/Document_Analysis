@@ -27,16 +27,25 @@ for i=1:numberFrames
 end
 
 boundingBoxesVideo= zeros(2,4,numberFrames/stepSize);
+areaBBVideo=zeros(numberFrames/stepSize);
 
 
-%frameNr=100;
+%%%%%%%%%%%%
+    vImage=read(v,22);
+    imwrite(vImage,imagePath);
+    detectPage(imagePath);
+%%%%%%%%%%%%%%
+
+
+
 for frameNr=1:stepSize:numberFrames
     
     vImage=read(v,frameNr);
     imwrite(vImage,imagePath);
 
     %% Calculate BestBoundingBox
-    boundingBoxesVideo(:,:,round(frameNr/stepSize)+1)=detectPage(imagePath);
+    
+    [boundingBoxesVideo(:,:,round(frameNr/stepSize)+1),angleOfMaxArea,maxArea(round(frameNr/stepSize)+1)]=detectPage(imagePath);
 end
 
  %% Calculate Jacard Index

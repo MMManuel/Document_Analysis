@@ -3,17 +3,18 @@
 % vImage=read(v,21);
 % imwrite(vImage, ImagePath);
 
-function [ bestBoundingBox ] = detectPage( ImagePath )
+function [ bestBoundingBox,angleOfMaxArea,maxArea ] = detectPage( ImagePath )
 %% parameters
 
 margin = 10;
-quadMargin = 10;
+quadMargin = 50;
 maxLength = 3000;
 maxAreaPercentage = 0.20;
 minLengthPercentage = 0.10;
 
 image = imread(ImagePath);
 image = rgb2gray(image);
+
 image = edge(image, 'canny');
 % se = strel('line',5,90);
 % image = imdilate(image, se);
@@ -24,7 +25,6 @@ image = edge(image, 'canny');
 % image = imerode(image, se);
 
 
-imwrite(image, ImagePath);
 
 %% get the start_points and end_points of each straight line use LSD.
 lines = lsd(ImagePath);
@@ -41,6 +41,9 @@ indices=find(length> ( img_width + img_height)/2 * minLengthPercentage & ...    
     lines(4,:)<img_height*0.9 & lines(4,:)>img_height*0.1);        %surrounding y2 removal
 lines=lines(:,indices);
 
+
+%plotOriginalLines(image,lines)
+
 % group lines
 indicesVertical=find(abs(lines(1,:)-lines(2,:))./abs(lines(3,:)-lines(4,:))<1);
 indicesHorizontal=find(abs(lines(1,:)-lines(2,:))./abs(lines(3,:)-lines(4,:))>1);
@@ -51,8 +54,6 @@ linesHorizontal=lines(:,indicesHorizontal);
 
 linesVertical = mergeLines(linesVertical, margin);
 linesHorizontal = mergeLines(linesHorizontal, margin);
-
-%plotReducedLines(image,linesHorizontal,linesVertical);
 
 %% discard lines
 length=(linesVertical(1,:)-linesVertical(2,:)).^2+(linesVertical(3,:)-linesVertical(4,:)).^2;
@@ -94,12 +95,16 @@ for hLines1=1:size(linesHorizontal,2)
                         vLine2(3) > maxYH2 && vLine2(4) > maxYH2
                         continue;
                 end
-                
-                if (edgesSharePoint(hLine1, vLine1, quadMargin) & ... 
-                    edgesSharePoint(hLine1, vLine2, quadMargin) & ...
-                    edgesSharePoint(hLine2, vLine1, quadMargin) & ... 
-                    edgesSharePoint(hLine2, vLine2, quadMargin) )
-                        i = i+1;
+                sharePointh1v1=edgesSharePoint(hLine1, vLine1, quadMargin);
+                sharePointh1v2=edgesSharePoint(hLine1, vLine2, quadMargin);
+                sharePointh2v1=edgesSharePoint(hLine2, vLine1, quadMargin);
+                sharePointh2v2=edgesSharePoint(hLine2, vLine2, quadMargin);
+
+                if (sharePointh1v1 & sharePointh1v2 & sharePointh2v1 |... 
+                    sharePointh1v1 & sharePointh1v2 & sharePointh2v2 |...
+                    sharePointh1v1 & sharePointh2v1 & sharePointh2v2 |...
+                    sharePointh1v2 & sharePointh2v1 & sharePointh2v2)
+                         i = i+1;
                         boundingBoxes(:, :,i) = calcBoundingBox(hLine1,hLine2,vLine1,vLine2);
                 end
             end
@@ -148,6 +153,7 @@ end
 
 % choose best quad
 maxArea = 0;
+angleOfMaxArea=[0 0 0 0];
 bestBoundingBox = zeros(2,4);
 areaLimit = img_width * img_height * maxAreaPercentage;
 
@@ -168,15 +174,15 @@ for i = 1:size(boundingBoxes,3)
     %check if horizontal lines have equal length also vertical lines
     lengthHorz1=sqrt(((boundingBox(1,1)-boundingBox(1,2)).^2+(boundingBox(2,1)-boundingBox(2,2)).^2));
     lengthHorz2=sqrt(((boundingBox(1,3)-boundingBox(1,4)).^2+(boundingBox(2,3)-boundingBox(2,4)).^2));
-    if abs(lengthHorz1-lengthHorz2)>0.2*lengthHorz1
+    if abs(lengthHorz1-lengthHorz2)>0.3*lengthHorz1
         %disp('horz length');
-        %continue;
+        continue;
     end
     lengthVert1=sqrt(((boundingBox(1,1)-boundingBox(1,4)).^2+(boundingBox(2,1)-boundingBox(2,4)).^2));
     lengthVert2=sqrt(((boundingBox(1,2)-boundingBox(1,3)).^2+(boundingBox(2,2)-boundingBox(2,3)).^2));
-    if abs(lengthVert1-lengthVert2)>0.2*lengthVert1
+    if abs(lengthVert1-lengthVert2)>0.3*lengthVert1
         %disp('vert length');
-        %continue;
+        continue;
     end
     
     %calculate aspectratio
@@ -197,40 +203,23 @@ for i = 1:size(boundingBoxes,3)
     
     angles = sum(vectors .* -circshift(vectors, 1, 2), 1);
     
-    if any(angles < -0.25) || any(angles > 0.25) 
-        %disp('angle');
+    if any(angles < -0.3) || any(angles > 0.3) 
         continue;
     end
     
     
     if area > maxArea && area < areaLimit
         maxArea = area;
+        angleOfMaxArea=angles;
         bestBoundingBox = boundingBox;
     end
 end
 
-
-% bestBoundingBox
-% 
-%  [order,area]=convhull(bestBoundingBox(1,:),bestBoundingBox(2,:));
-%  lengthHorz1=sqrt(((bestBoundingBox(1,1)-bestBoundingBox(1,2)).^2+(bestBoundingBox(2,1)-bestBoundingBox(2,2)).^2))
-%  lengthHorz2=sqrt(((bestBoundingBox(1,3)-bestBoundingBox(1,4)).^2+(bestBoundingBox(2,3)-bestBoundingBox(2,4)).^2))
-%  lengthVert1=sqrt(((bestBoundingBox(1,1)-bestBoundingBox(1,4)).^2+(bestBoundingBox(2,1)-bestBoundingBox(2,4)).^2))
-%  lengthVert2=sqrt(((bestBoundingBox(1,2)-bestBoundingBox(1,3)).^2+(bestBoundingBox(2,2)-bestBoundingBox(2,3)).^2))
-%  area
-%  aspectRatio=(max(lengthHorz1,lengthHorz2)/min(lengthVert1,lengthVert2) + ...
-%         min(lengthHorz1,lengthHorz2)/max(lengthVert1,lengthVert2))/2
-% 
-% vectors = circshift(bestBoundingBox, -1, 2) - bestBoundingBox;
-% vectors = vectors./repmat(sqrt(vectors(1,:).^2+vectors(2,:).^2),2,1);
-%     
-% angles = sum(vectors .* -circshift(vectors, 1, 2), 1)
-
+%Save area and angle
 
 
 % plot the lines.
-%plotReducedLines(image,linesHorizontal,linesVertical);
-%plotBB(image,bestBoundingBox);
+%plotBB(image,bestBoundingBox,linesHorizontal,linesVertical);
 
 end
 
@@ -257,10 +246,16 @@ function [] = plotReducedLines(image,linesHorizontal,linesVertical)
     hold off;
 end
 
-function [] = plotBB(image,bestBoundingBox)
+function [] = plotBB(image,bestBoundingBox,linesHorizontal,linesVertical)
     figure;
     imshow(image);
     hold on; 
+    for i = 1:size(linesHorizontal, 2)
+        plot(linesHorizontal(1:2, i), linesHorizontal(3:4, i), 'LineWidth', linesHorizontal(5, i) / 2, 'Color', [1, 0, 0]);
+    end
+    for i = 1:size(linesVertical, 2)
+        plot(linesVertical(1:2, i), linesVertical(3:4, i), 'LineWidth', linesVertical(5, i) / 2, 'Color', [1, 0, 0]);
+    end
     plot(bestBoundingBox(1,:), bestBoundingBox(2,:), 'LineWidth', 3, 'Color', [0, 0, 1]);
     hold off;
 end
@@ -269,7 +264,7 @@ function [] = plotBBs(image,boundingBoxes)
     figure;
     imshow(image);
     hold on; 
-    for i=1:size(boundingBoxes,1)
+    for i=1:size(boundingBoxes,3)
         plot(boundingBoxes(1,:,i), boundingBoxes(2,:,i), 'LineWidth', 3, 'Color', [0, 0, 1]);
     end
     hold off;
