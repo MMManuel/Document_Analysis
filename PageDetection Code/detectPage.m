@@ -1,7 +1,8 @@
-% ImagePath='./images/myImage.jpg';
-% v = VideoReader('..\page-detection\background01\datasheet002.avi');
-% vImage=read(v,21);
-% imwrite(vImage, ImagePath);
+%% Page Detection 
+% Group 2 AA
+% Timon Höbert 
+% Manuel Mayerhofer
+% Stefan Stappen
 
 function [ bestBoundingBox,maxArea ] = detectPage( vImage )
 %% parameters
@@ -14,10 +15,15 @@ minLengthPercentage = 0.10;
 imagePath='./images/myImage.jpg';
 
 image = vImage;
+image = image./2;
 image = rgb2gray(image);
 
-image = edge(image, 'canny',[],3 );
+image=imadjust(image);
+%image = edge(image, 'canny');
+
+image = edge(image, 'canny',[],4 );
 imwrite(image,imagePath);
+
 % se = strel('line',5,90);
 % image = imdilate(image, se);
 % image = imdilate(image, se);
@@ -165,7 +171,7 @@ if isempty(boundingBoxes)
 end
 
 for i = 1:size(boundingBoxes,3)
-    if i==5
+    if i==8
     hi=0;
     end
     % reorder corner points
@@ -179,13 +185,13 @@ for i = 1:size(boundingBoxes,3)
     %check if horizontal lines have equal length also vertical lines
     lengthHorz1=sqrt(((boundingBox(1,1)-boundingBox(1,2)).^2+(boundingBox(2,1)-boundingBox(2,2)).^2));
     lengthHorz2=sqrt(((boundingBox(1,3)-boundingBox(1,4)).^2+(boundingBox(2,3)-boundingBox(2,4)).^2));
-    if abs(lengthHorz1-lengthHorz2)>0.3*lengthHorz1
+    if abs(lengthHorz1-lengthHorz2)>0.35*lengthHorz1
         %disp('horz length');
         continue;
     end
     lengthVert1=sqrt(((boundingBox(1,1)-boundingBox(1,4)).^2+(boundingBox(2,1)-boundingBox(2,4)).^2));
     lengthVert2=sqrt(((boundingBox(1,2)-boundingBox(1,3)).^2+(boundingBox(2,2)-boundingBox(2,3)).^2));
-    if abs(lengthVert1-lengthVert2)>0.3*lengthVert1
+    if abs(lengthVert1-lengthVert2)>0.35*lengthVert1
         %disp('vert length');
         continue;
     end
@@ -196,21 +202,21 @@ for i = 1:size(boundingBoxes,3)
         min(lengthHorz1,lengthHorz2)/max(lengthVert1,lengthVert2))/2;
     a4AR = 1/sqrt(2);
     
-    if (aspectRatio < a4AR-0.25 || aspectRatio > a4AR+0.25) && ...
-        (aspectRatio < 1/a4AR-0.25 || aspectRatio > 1/a4AR+0.25)
+    if (aspectRatio < a4AR-0.35 || aspectRatio > a4AR+0.35) && ...
+        (aspectRatio < 1/a4AR-0.35 || aspectRatio > 1/a4AR+0.35)
         %disp('aspectRatio');
         continue;
     end
     
     % angle computation
-    vectors = circshift(boundingBox, -1, 2) - boundingBox;
-    vectors = vectors./repmat(sqrt(vectors(1,:).^2+vectors(2,:).^2),2,1);
-    
-    angles = sum(vectors .* -circshift(vectors, 1, 2), 1);
-    
-    if any(angles < -0.44) || any(angles > 0.44) 
-        continue;
-    end
+%     vectors = circshift(boundingBox, -1, 2) - boundingBox;
+%     vectors = vectors./repmat(sqrt(vectors(1,:).^2+vectors(2,:).^2),2,1);
+%     
+%     angles = sum(vectors .* -circshift(vectors, 1, 2), 1);
+%     
+%     if any(angles < -0.45) || any(angles > 0.45) 
+%         continue;
+%     end
     
     
     if area > maxArea && area < areaLimit

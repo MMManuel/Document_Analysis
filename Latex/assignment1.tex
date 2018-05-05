@@ -1,0 +1,130 @@
+%%report template for pattern recognition SS2016
+
+\documentclass[english, paper=a4]{scrartcl}
+\usepackage[utf8]{inputenc}
+% images
+\usepackage{graphicx}
+%math
+\usepackage{amsmath,amssymb}
+%code
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\makeatletter
+\def\BState{\State\hskip-\ALG@thistlm}
+\makeatother
+
+\usepackage{subcaption}
+\captionsetup{compatibility=false}
+\usepackage{multirow}
+\usepackage{color}
+\usepackage{enumitem}
+
+
+\begin{document}
+
+\graphicspath{{images/}}
+
+
+%%------------------------------------------------------
+%% provide your input here:
+\title{Assignment 1 - Page Detection} 
+
+\subtitle{Document Analysis} 
+
+\author{Timon Höbert(01427936) \\ Manuel Mayerhofer (01328948)\\ Stefan Stappen(0132)}
+
+
+
+%%------------------------------------------------------
+
+\maketitle
+
+
+%%------------------------------------------------------
+
+\section{Definition of Task}
+Page detection is the task of detecting and segmenting the page outline of a document within an image. The ICDAR2015Competition on Smartphone Document Capture and OCR (SmartDoc) \cite{burie2015icdar2015} is the first competition for document page detection and Smartphone OCR. The first assignment is the page detection.\\
+The input is a set of video clips containing a document at different backgrounds. The output contains the bounding box of the document in quadrilateral coordinates per each frame of the video clip.
+
+\section{Dataset}
+The dataset consists of six different document types: Datasheet, letter, magazine, paper, patent, and tax.
+For each document type, there are five different documents, which cover different document layout schemes and contents.
+The six document types are recorded on five different backgrounds. A result is a number of 30 videos per background and a total of 150 videos. The videos are recorded using FULL HD resolution at variable frame rate.  
+Every video has a duration of around 10 seconds. The videos include distortions like focus and motion blur, the perspective of the document, change of illumination and partial occlusions of the document pages. Each frame is ground-truthed by annotating the quadrilateral coordinates of each frame in an XML file.
+
+\section{Implementation}
+Our method is based on the method of P Li, Y Niw and X. Li from NetEase.
+
+\subsection{Preprocessing}
+First, the image is converted in a gray value image. Then we use the canny edge detector with a sigma of 3 to create a binary image of the document. We chose the canny detector because it found most of the edges in the document frames, unlike Sobel or Prewitt. However, there were many distortions on the edges, so we increased the sigma from $\sqrt{2}$ to 4 to smooth the image a bit. The result of the preprocessing steps looks like Figure \ref{fig:pre}.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{pre.png}
+\caption{Document frame of the image after the preprocessing step.}
+\label{fig:pre}
+\end{figure}
+
+\subsection{Line Segment Detector}
+After the preprocessing we use the line segment detector (LSD) \cite{von2010lsd} to detect the lines in the image. We use the LSD-OpenCV-MATLAB \cite{lsd2014}. The LSD algorithm detects the essential lines in the image, but because we use the canny edge detector as a preprocessing step. There are many disturbances in the image, and the LSD algorithm detects lines that are no line in the real image. However, we need the canny detector because in frames, where the document and the background have similar color the LSD algorithm detects no edges of the document.
+
+The founded set of lines is reduced as follows. Lines are removed which have a minimum length of the image size. Furthermore, lines are removed which are near the border of the image or which have their starting point on the border of the image.\\
+The result of the reduced set of lines with the LSD algorithm is shown in Figure \ref{fig:redLines}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.7\textwidth]{redLines.png}
+\caption{Document frame of the image after the preprocessing step.}
+\label{fig:redLines}
+\end{figure}
+
+\subsection{Bounding Box Calculation}
+The line segments are grouped in horizontal and vertical segments. After that, we merge lines that have the same direction with a certain margin between the line segments.
+Then we select two horizontal and two vertical lines and calculate the bounding boxes of the document.
+When selecting horizontal and vertical lines, only those with at least 3 of 4 lines have a similar start, or end point are selected.
+
+\subsection{Best Bounding Box Selection}
+For every bounding box we calculate the following properties:
+\begin{itemize}
+\item Area
+\begin{itemize}
+\item The area is the most important property because we choose the bounding box with the greatest area, but we also check if the area exceeds a limit because sometimes the table is also recognized and this would form the greatest area. 
+\end{itemize}
+\item Length of the horizontal and vertical lines
+\begin{itemize}
+\item We check if the two horizontal lines are equal in length with a little threshold, for vertical lines respectively. 
+\end{itemize}
+\item Aspect ratio
+\begin{itemize}
+\item We assume that we recognize documents in the A4 format in portrait format or horizontal format.
+\end{itemize}
+\item Inner angles
+\begin{itemize}
+\item We check if the inner equals are similar to 90 degrees, but because of the perspective distortion, we accept a high deviation of the angles to achieve suitable results.
+\end{itemize}
+\end{itemize}
+
+If the bounding box complete the property checks, we choose the bounding box with the greatest area. 
+
+\subsection{Frame Interpolation}
+If we get no bounding box from the algorithm or the bounding box is smaller than the average bounding boxes in the complete video we interpolate between frames with areas that have an area greater than the average area of the bounding boxes.
+
+\section{Performance}
+One big drawback of the algorithm is the execution time that depends on the number of founded line segments. We calculate for every combination of two horizontal and two vertical lines a bounding box. This is huge expense even with a small number of lines due to the permutations. Another problem is that the LSD algorithm takes only an input image path as input. So we have to create an image for every frame and write it out.
+
+\section{Evaluation}
+To measure the performance the Jacard index measure \cite{everingham2010pascal} is used. 
+The Jacard index is the intersection of the detected bounding box with the ground truth document bounding box divided through the union of the bounding boxes (see equation \ref{eq:1}).
+\begin{equation}\label{eq:1}
+JI(frame)= \frac{area(G\cap S))}{area(G\cup S))}
+\end{equation}
+
+The score for one video is the average of the frame scores, and the overall accuracy of the implemented method is average of all videos with different backgrounds.
+
+\section{Results}
+
+\newpage
+\bibliographystyle{plain}
+\bibliography{lit}
+%% References can be stored in a seperate bib-file (see lit.bib). References, that are cited in the report using \cite are automatically added to the reference list. For more information: http://www.bibtex.org/Using/
+%%------------------------------------------------------
+\end{document}

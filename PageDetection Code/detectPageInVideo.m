@@ -7,7 +7,7 @@ function [ jacardIndex ] = detectPageInVideo( videoPath,xmlPath )
 %  jacardIndex of the video := Average of the frame jacardindices
     
 %% init
-stepSize = 2;
+stepSize = 5;
 
 %% Load videframes
 
@@ -31,9 +31,8 @@ areaBBVideo=zeros(numberFrames,1);
 
 
 %%%%%%%%%%%%
-%     vImage=read(v,118);
-%     imwrite(vImage,imagePath);
-%     detectPage(imagePath);
+%     vImage=read(v,21);
+%     detectPage(vImage);
 %%%%%%%%%%%%%%
 
 
@@ -50,40 +49,42 @@ end
 averageArea=0;
 counter=0;
 
+interpolation=true;
 
-for i=1:stepSize:length(boundingBoxesVideo)
-    if areaBBVideo(i)~=0
-        counter=counter+1;
-        averageArea=averageArea+areaBBVideo(i);
+if(interpolation)
+    for i=1:stepSize:length(boundingBoxesVideo)
+        if areaBBVideo(i)~=0
+            counter=counter+1;
+            averageArea=averageArea+areaBBVideo(i);
+        end
+    end
+    averageArea=averageArea/counter;
+
+    for frameNr=1:numberFrames 
+        if frameNr==221
+        hi=0;
+        end
+        atTheEnd=true;
+        if(areaBBVideo(frameNr)<averageArea*0.7)
+            for i=frameNr+1:numberFrames
+                 if(areaBBVideo(i)>averageArea*0.7)
+                     boundingBoxesVideo(:,:,frameNr)=boundingBoxesVideo(:,:,i);
+                     atTheEnd=false;
+                     break;
+                 end
+            end
+            %if the last ones habe no values go in the other direction
+            if atTheEnd
+                for i=frameNr-1:-1:1
+                 if(areaBBVideo(i)>averageArea*0.7)
+                     boundingBoxesVideo(:,:,frameNr)=boundingBoxesVideo(:,:,i);
+                     break;
+                 end
+            end
+            end
+        end
     end
 end
-averageArea=averageArea/counter;
-
-for frameNr=1:numberFrames 
-    if frameNr==221
-    hi=0;
-    end
-    atTheEnd=true;
-    if(areaBBVideo(frameNr)<averageArea*0.7)
-        for i=frameNr+1:numberFrames
-             if(areaBBVideo(i)>averageArea*0.7)
-                 boundingBoxesVideo(:,:,frameNr)=boundingBoxesVideo(:,:,i);
-                 atTheEnd=false;
-                 break;
-             end
-        end
-        %if the last ones habe no values go in the other direction
-        if atTheEnd
-            for i=frameNr-1:-1:1
-             if(areaBBVideo(i)>averageArea*0.7)
-                 boundingBoxesVideo(:,:,frameNr)=boundingBoxesVideo(:,:,i);
-                 break;
-             end
-        end
-        end
-    end
-end
-
  %% Calculate Jacard Index
     jacardIndexFrames= zeros(frameNr,1);
     for frameNr=1:numberFrames

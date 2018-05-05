@@ -1,0 +1,31 @@
+\begin{thebibliography}{1}
+
+\bibitem{burie2015icdar2015}
+Jean-Christophe Burie, Joseph Chazalon, Micka{\"e}l Coustaty, S{\'e}bastien
+  Eskenazi, Muhammad~Muzzamil Luqman, Maroua Mehri, Nibal Nayef, Jean-Marc
+  Ogier, Sophea Prum, and Mar{\c{c}}al Rusi{\~n}ol.
+\newblock Icdar2015 competition on smartphone document capture and ocr
+  (smartdoc).
+\newblock In {\em Document Analysis and Recognition (ICDAR), 2015 13th
+  International Conference on}, pages 1161--1165. IEEE, 2015.
+
+\bibitem{everingham2010pascal}
+Mark Everingham, Luc Van~Gool, Christopher~KI Williams, John Winn, and Andrew
+  Zisserman.
+\newblock The pascal visual object classes (voc) challenge.
+\newblock {\em International journal of computer vision}, 88(2):303--338, 2010.
+
+\bibitem{lsd2014}
+primetang.
+\newblock Lsd-opencv-matlab.
+\newblock https://github.com/primetang/LSD-OpenCV-MATLAB, commit:
+  0b035a8c5b105091604d71f1570ac4d4526aec8d, 2014.
+
+\bibitem{von2010lsd}
+Rafael~Grompone Von~Gioi, Jeremie Jakubowicz, Jean-Michel Morel, and Gregory
+  Randall.
+\newblock Lsd: A fast line segment detector with a false detection control.
+\newblock {\em IEEE transactions on pattern analysis and machine intelligence},
+  32(4):722--732, 2010.
+
+\end{thebibliography}

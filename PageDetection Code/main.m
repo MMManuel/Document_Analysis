@@ -16,9 +16,9 @@ end
 %resultJacardIndices := column= background JIs: 30x5   
 resultJacardIndices= zeros(fileNumber/2,backgroundNumber);
 
-%detectPageInVideo('..\page-detection\background04\magazine004.avi','..\page-detection\background04\magazine004.gt.xml')
+% detectPageInVideo('..\page-detection\background05\magazine003.avi','..\page-detection\background05\magazine003.gt.xml')
 
-i=1;
+i=4;
 % for i=1:backgroundNumber
     for j=1:2:fileNumber
         resultJacardIndices(j,i) = detectPageInVideo( videoPath{j,i},videoPath{j+1,i});
