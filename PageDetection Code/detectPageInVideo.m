@@ -36,8 +36,8 @@ areaBBVideo=zeros(numberFrames,1);
 
 
 %%%%%%%%%%%%
-%     vImage=read(v,161);
-%     detectPage(vImage);
+    vImage=read(v,50);
+    detectPage(vImage);
 % %%%%%%%%%%%%%%
 
 
@@ -112,7 +112,8 @@ end
     %Average the jacardIndex over the frames
     jacardIndex=0;
     jacardIndex=sum(jacardIndexFrames)/length(jacardIndexFrames);
-
+    
+  
     disp([videoPath ' ' num2str(jacardIndex)])
     %[double(1:stepSize:numberFrames); jacardIndexFrames(1:stepSize:numberFrames)']'
 end

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6600 64-bit) (preloaded format=pdflatex 2018.3.1)  6 MAY 2018 15:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6600 64-bit) (preloaded format=pdflatex 2018.3.1)  6 MAY 2018 19:28
 entering extended mode
 **./assignment1.tex
 (assignment1.tex
@@ -617,7 +617,11 @@ Package: enumitem 2011/09/28 v3.5.2 Customized lists
 LaTeX Warning: Unused global option(s):
     [english].
 
-(assignment1.aux)
+(assignment1.aux
+
+LaTeX Warning: Label `fig:lsd' multiply defined.
+
+)
 \openout1 = `assignment1.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
@@ -726,51 +730,85 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 
 {C:/Users/Manuel/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-<pre.png, id=8, 1576.38937pt x 880.79062pt>
-File: pre.png Graphic file (type png)
-<use pre.png>
-Package pdftex.def Info: pre.png  used on input line 63.
+<lsd.png, id=8, 1576.38937pt x 880.79062pt>
+File: lsd.png Graphic file (type png)
+<use lsd.png>
+Package pdftex.def Info: lsd.png  used on input line 65.
 (pdftex.def)             Requested size: 292.7776pt x 163.57538pt.
+
+
+LaTeX Warning: Reference `fig:redLines' on page 2 undefined on input line 72.
+
 <redLines.png, id=9, 1576.38937pt x 880.79062pt>
 File: redLines.png Graphic file (type png)
 <use redLines.png>
-Package pdftex.def Info: redLines.png  used on input line 75.
+Package pdftex.def Info: redLines.png  used on input line 76.
 (pdftex.def)             Requested size: 292.7776pt x 163.57538pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[2 <./pre.png (PNG copy)>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 88.
+[2 <./lsd.png (PNG copy)> <./redLines.png (PNG copy)>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 87.
 
 ("C:\Users\Manuel\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 88.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 87.
+<bb.png, id=14, 1576.38937pt x 880.79062pt>
+File: bb.png Graphic file (type png)
+<use bb.png>
+Package pdftex.def Info: bb.png  used on input line 109.
+(pdftex.def)             Requested size: 292.7776pt x 163.57538pt.
 
-[3 <./redLines.png (PNG copy)>] [4] (assignment1.bbl) [5] (assignment1.aux) ) 
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[3]
+<pre.png, id=19, 1576.38937pt x 880.79062pt>
+File: pre.png Graphic file (type png)
+<use pre.png>
+Package pdftex.def Info: pre.png  used on input line 134.
+(pdftex.def)             Requested size: 292.7776pt x 163.57538pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `tbp') on input line 139.
+
+
+Overfull \hbox (50.13614pt too wide) in paragraph at lines 143--180
+ [][] 
+ []
+
+[4 <./bb.png (PNG copy)>] [5] (assignment1.bbl) [6 <./pre.png (PNG copy)>]
+(assignment1.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 6723 strings out of 493303
- 110941 string characters out of 3129350
- 260308 words of memory out of 3000000
- 10173 multiletter control sequences out of 15000+200000
+ 6738 strings out of 493303
+ 111096 string characters out of 3129350
+ 279363 words of memory out of 3000000
+ 10186 multiletter control sequences out of 15000+200000
  13022 words of font info for 50 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 51i,7n,52p,8851b,326s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C
-:/Users/Manuel/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmbx10.pfb><C:/Users/Manuel/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publ
-ic/amsfonts/cm/cmmi10.pfb><C:/Users/Manuel/AppData/Local/Programs/MiKTeX 2.9/fo
-nts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Manuel/AppData/Local/Programs/
-MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Manuel/AppData/Lo
-cal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/M
-anuel/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.p
-fb><C:/Users/Manuel/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmti10.pfb>
-Output written on assignment1.pdf (5 pages, 242959 bytes).
+ 51i,10n,52p,8851b,326s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Users/Manuel/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfont
+s/cm/cmbx10.pfb><C:/Users/Manuel/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmmi10.pfb><C:/Users/Manuel/AppData/Local/Programs/MiKTeX 2.
+9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/Manuel/AppData/Local/Progr
+ams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/Manuel/AppDat
+a/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Use
+rs/Manuel/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy
+10.pfb><C:/Users/Manuel/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cm/cmti10.pfb>
+Output written on assignment1.pdf (6 pages, 3821998 bytes).
 PDF statistics:
- 48 PDF objects out of 1000 (max. 8388607)
+ 53 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
