@@ -1,3 +1,8 @@
+%% Page Detection 
+% Timon Höbert 01427936
+% Manuel Mayerhofer 01328948
+% Stefan Stappen 01329020
+
 function boundingBox = calcBoundingBox(hLine1,hLine2,vLine1,vLine2)
 %calcBoundingBox([2;4;2;2],[2;4;5;5],[1;1;3;4],[5;5;3;4])
 % calculates the intersection of 2 horizontal and 2 vertical Lines that form a bounding box

@@ -1,3 +1,8 @@
+%% Page Detection 
+% Timon Höbert 01427936
+% Manuel Mayerhofer 01328948
+% Stefan Stappen 01329020
+
 function  newLines  = mergeLines( lines, margin )
 %MERGELINES merge lines within pixel margin. 
 % All lines sharing a common endpoint within a circular marign are merged

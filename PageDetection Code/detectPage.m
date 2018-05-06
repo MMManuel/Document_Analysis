@@ -1,8 +1,7 @@
 %% Page Detection 
-% Group 2 AA
-% Timon Höbert 
-% Manuel Mayerhofer
-% Stefan Stappen
+% Timon Höbert 01427936
+% Manuel Mayerhofer 01328948
+% Stefan Stappen 01329020
 
 function [ bestBoundingBox,maxArea ] = detectPage( vImage )
 %% parameters
@@ -15,38 +14,27 @@ minLengthPercentage = 0.10;
 imagePath='./images/myImage.jpg';
 
 image = vImage;
-image = image./2;
-image = rgb2gray(image);
+%image = rgb2gray(image);
 
-image=imadjust(image);
-%image = edge(image, 'canny');
+%image=imadjust(image);
+%image = edge(image, 'Canny');
 
-image = edge(image, 'canny',[],4 );
+%image = edge(image, 'canny',[],4 );
 imwrite(image,imagePath);
-
-% se = strel('line',5,90);
-% image = imdilate(image, se);
-% image = imdilate(image, se);
-% image = imdilate(image, se);
-% image = imerode(image, se);
-% image = imerode(image, se);
-% image = imerode(image, se);
-
 
 
 %% get the start_points and end_points of each straight line use LSD.
 lines = lsd(imagePath);
 
- 
-
 img_width=size(image,2);
 img_height=size(image,1);
 length=(lines(1,:)-lines(2,:)).^2+(lines(3,:)-lines(4,:)).^2;
-indices=find(length> ( img_width + img_height)/2 * minLengthPercentage & ...                                              %length removal
-    lines(1,:)<img_width*0.8 & lines(1,:)>img_width*0.2 & ...      %surrounding x1 removal
-    lines(2,:)<img_width*0.8 & lines(2,:)>img_width*0.2 & ...      %surrounding x2 removal
-    lines(3,:)<img_height*0.9 & lines(3,:)>img_height*0.1 & ...    %surrounding y1 removal
-    lines(4,:)<img_height*0.9 & lines(4,:)>img_height*0.1);        %surrounding y2 removal
+
+indices=find(length>20&...                                                           %line width removal
+    lines(1,:)<img_width*0.8 & lines(1,:)>img_width*0.2 & ...                   %surrounding x1 removal
+    lines(2,:)<img_width*0.8 & lines(2,:)>img_width*0.2 & ...                   %surrounding x2 removal
+    lines(3,:)<img_height*0.85 & lines(3,:)>img_height*0.1 & ...                %surrounding y1 removal
+    lines(4,:)<img_height*0.85 & lines(4,:)>img_height*0.1);                    %surrounding y2 removal
 lines=lines(:,indices);
 
 
@@ -59,7 +47,6 @@ linesVertical=lines(:,indicesVertical);
 linesHorizontal=lines(:,indicesHorizontal);
 
 %% mergelines
-
 linesVertical = mergeLines(linesVertical, margin);
 linesHorizontal = mergeLines(linesHorizontal, margin);
 
@@ -71,8 +58,6 @@ linesVertical=linesVertical(:,indices);
 length=(linesHorizontal(1,:)-linesHorizontal(2,:)).^2+(linesHorizontal(3,:)-linesHorizontal(4,:)).^2;
 indices=find(length>maxLength);        %surrounding y2 removal
 linesHorizontal=linesHorizontal(:,indices);
-
-%plotReducedLines(image,linesHorizontal,linesVertical);
 
 %% compute bounding boxes
 
@@ -166,17 +151,13 @@ areaLimit = img_width * img_height * maxAreaPercentage;
 
 %No Bounding Box Found
 if isempty(boundingBoxes)
-    disp('error, no bb')
     return;
 end
 
 for i = 1:size(boundingBoxes,3)
-    if i==8
-    hi=0;
-    end
     % reorder corner points
     boundingBox = boundingBoxes(:, :,i);
-    %plotBB(image,boundingBox,linesHorizontal,linesVertical);
+   % plotBB(image,boundingBox,linesHorizontal,linesVertical);
     [order,area]=convhull(boundingBox(1,:),boundingBox(2,:));
     %boundingBox points in counterclockwise order
     boundingBox=horzcat(boundingBox(:,order(1)),boundingBox(:,order(2)),boundingBox(:,order(3)),boundingBox(:,order(4)));
@@ -208,24 +189,26 @@ for i = 1:size(boundingBoxes,3)
         continue;
     end
     
-    % angle computation
-%     vectors = circshift(boundingBox, -1, 2) - boundingBox;
-%     vectors = vectors./repmat(sqrt(vectors(1,:).^2+vectors(2,:).^2),2,1);
-%     
-%     angles = sum(vectors .* -circshift(vectors, 1, 2), 1);
-%     
-%     if any(angles < -0.45) || any(angles > 0.45) 
-%         continue;
-%     end
+    %angle computation
+    vectors = circshift(boundingBox, -1, 2) - boundingBox;
+    vectors = vectors./repmat(sqrt(vectors(1,:).^2+vectors(2,:).^2),2,1);
+    vectorsOtherDirection=-circshift(vectors, -1, 2);
+    angles = sum(vectors .* vectorsOtherDirection, 1)./...
+        (sqrt(vectors(1,:).^2+vectors(2,:).^2).*sqrt(vectorsOtherDirection(1,:).^2+vectorsOtherDirection(2,:).^2));
+    
+    if any(angles < -0.55) || any(angles > 0.55) 
+        continue;
+    end
     
     
     if area > maxArea && area < areaLimit
+        angleBB=angles;
         maxArea = area;
         bestBoundingBox = boundingBox;
     end
 end
 
-%Save area and angle
+
 
 
 % plot the lines.

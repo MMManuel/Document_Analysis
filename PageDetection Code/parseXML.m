@@ -1,3 +1,7 @@
+%% Page Detection 
+% Timon Höbert 01427936
+% Manuel Mayerhofer 01328948
+% Stefan Stappen 01329020
 function theStruct = parseXML(filename)
 % PARSEXML Convert XML file to a MATLAB structure.
 try

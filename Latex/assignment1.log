@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6600 64-bit) (preloaded format=pdflatex 2018.3.1)  5 MAY 2018 13:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6600 64-bit) (preloaded format=pdflatex 2018.3.1)  6 MAY 2018 15:41
 entering extended mode
 **./assignment1.tex
 (assignment1.tex
@@ -752,7 +752,7 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 [3 <./redLines.png (PNG copy)>] [4] (assignment1.bbl) [5] (assignment1.aux) ) 
 Here is how much of TeX's memory you used:
  6723 strings out of 493303
- 110791 string characters out of 3129350
+ 110941 string characters out of 3129350
  260308 words of memory out of 3000000
  10173 multiletter control sequences out of 15000+200000
  13022 words of font info for 50 fonts, out of 3000000 for 9000
@@ -768,7 +768,7 @@ cal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/M
 anuel/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.p
 fb><C:/Users/Manuel/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfon
 ts/cm/cmti10.pfb>
-Output written on assignment1.pdf (5 pages, 243179 bytes).
+Output written on assignment1.pdf (5 pages, 242959 bytes).
 PDF statistics:
  48 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

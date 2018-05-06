@@ -1,3 +1,8 @@
+%% Page Detection 
+% Timon Höbert 01427936
+% Manuel Mayerhofer 01328948
+% Stefan Stappen 01329020
+
 function [ jacardIndex ] = detectPageInVideo( videoPath,xmlPath )
 %% input
 %  videoPath e.g...\page-detection\background01\datasheet001.avi
@@ -31,14 +36,13 @@ areaBBVideo=zeros(numberFrames,1);
 
 
 %%%%%%%%%%%%
-%     vImage=read(v,21);
+%     vImage=read(v,161);
 %     detectPage(vImage);
-%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%
 
 
 
 for frameNr=1:stepSize:numberFrames
-    
     vImage=read(v,frameNr);
 
     %% Calculate BestBoundingBox
@@ -59,28 +63,36 @@ if(interpolation)
         end
     end
     averageArea=averageArea/counter;
-
+    
+    tempBB= zeros(2,4,2);
+    
     for frameNr=1:numberFrames 
-        if frameNr==221
-        hi=0;
+        if frameNr==17
+            hi=0;
         end
-        atTheEnd=true;
         if(areaBBVideo(frameNr)<averageArea*0.7)
             for i=frameNr+1:numberFrames
                  if(areaBBVideo(i)>averageArea*0.7)
-                     boundingBoxesVideo(:,:,frameNr)=boundingBoxesVideo(:,:,i);
-                     atTheEnd=false;
+                     tempBB(:,:,1)=boundingBoxesVideo(:,:,i);
                      break;
                  end
             end
-            %if the last ones habe no values go in the other direction
-            if atTheEnd
-                for i=frameNr-1:-1:1
-                 if(areaBBVideo(i)>averageArea*0.7)
-                     boundingBoxesVideo(:,:,frameNr)=boundingBoxesVideo(:,:,i);
-                     break;
-                 end
+            for i=frameNr-1:-1:1
+             if(areaBBVideo(i)>averageArea*0.7)
+                 tempBB(:,:,2)=boundingBoxesVideo(:,:,i);
+                 break;
+             end
             end
+            if tempBB(:,:,2) ==0 |tempBB(:,:,1)==0
+                boundingBoxesVideo(:,:,frameNr)=tempBB(:,:,1)+tempBB(:,:,2);
+            else
+                temp=zeros(1,4);
+                temp(1)=sum(sum(abs(tempBB(:,:,1)-tempBB(:,:,2))));
+                temp(2)=sum(sum(abs(tempBB(:,:,1)-circshift(tempBB(:,:,2), -1, 2))));
+                temp(3)=sum(sum(abs(tempBB(:,:,1)-circshift(tempBB(:,:,2), -2, 2))));
+                temp(4)=sum(sum(abs(tempBB(:,:,1)-circshift(tempBB(:,:,2), -3, 2))));
+                [value,index]=min(temp);
+                boundingBoxesVideo(:,:,frameNr)=(tempBB(:,:,1)+circshift(tempBB(:,:,2), -index+1, 2))/2;
             end
         end
     end
@@ -102,6 +114,6 @@ end
     jacardIndex=sum(jacardIndexFrames)/length(jacardIndexFrames);
 
     disp([videoPath ' ' num2str(jacardIndex)])
-    [double(1:stepSize:numberFrames); jacardIndexFrames(1:stepSize:numberFrames)']'
+    %[double(1:stepSize:numberFrames); jacardIndexFrames(1:stepSize:numberFrames)']'
 end
 

@@ -1,3 +1,8 @@
+%% Page Detection 
+% Timon Höbert 01427936
+% Manuel Mayerhofer 01328948
+% Stefan Stappen 01329020
+
 function sharePoint = edgesSharePoint( line1, line2, margin )
 %EDGESSHAREPOINT 
 % computes if two edges share a common point within margin
