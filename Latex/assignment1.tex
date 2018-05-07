@@ -222,7 +222,8 @@ To overcome this proble, we convert the image in a gray value image. Then we use
 
 With this preprocessing step the LSD again finds reasonable lines for the datasets
 with background four and five. Though, the results only improved to about 60 \%.
-For the realistic backgrounds, one, two and three this preprocessing step has a severe impact. 
+For the realistic backgrounds, one, two and three this preprocessing step has a severe impact. Due to the loss of information by converting the image into an edge image,
+the important lines get lost for the realistic data sets.
 The results are reduced from over 90 \% to about 60 \%. 
 For this reason we stayed without the preprocessing step and 
 therefore created a method which works quite well for realistic scenarios
