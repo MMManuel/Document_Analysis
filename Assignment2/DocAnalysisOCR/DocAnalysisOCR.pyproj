@@ -21,10 +21,20 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="classifier.py" />
+    <Compile Include="line_segmentation.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="main.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ocr.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="preprocess.py" />
+    <Compile Include="char_segmentation.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="word_segmentation.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
