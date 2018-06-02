@@ -21,7 +21,7 @@ def ocr_per_image(img_url):
     segmentation_img2 = get_recognition_image(orig_image)
     
     im_to_skel = cv2.erode(segmentation_img2, np.ones((2,2),np.uint8))
-    #segmentation_img2 = cv2.erode(segmentation_img2, np.ones((2,2),np.uint8))
+    # segmentation_img2 = cv2.erode(segmentation_img2, np.ones((2,2),np.uint8))
     #segmentation_img2 = cv2.dilate(segmentation_img2, np.ones((3,1),np.uint8))
 
     size = np.size(im_to_skel)
