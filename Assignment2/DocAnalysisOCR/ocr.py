@@ -3,20 +3,25 @@ import numpy as np
 
 from preprocess import get_segmentation_image
 from preprocess import get_recognition_image
+from preprocess import resizeAndPadImage
+from preprocess import cropImage
 
 from line_segmentation import get_lines
 from word_segmentation import get_words
 from char_segmentation import get_characters
 
+outSize = 28
+
 def ocr_per_image(img_url):
 
     orig_image = cv2.imread(img_url, 0)
     #cv2.imshow("image", orig_image)
-    
 
-    height, width = orig_image.shape;
+    height, width = orig_image.shape
 
     # preprocess
+    inverted = cv2.bitwise_not(orig_image)
+
     segmentation_img = get_segmentation_image(orig_image)
     segmentation_img2 = get_recognition_image(orig_image)
     
@@ -42,10 +47,6 @@ def ocr_per_image(img_url):
             
     skel = cv2.dilate(skel, np.ones((3,3), np.uint8))
     skel = cv2.erode(skel, np.ones((3,3), np.uint8))
-    
-    cv2.imshow("image", segmentation_img2)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
 
     # get lines
     lines, lineHeights = get_lines(segmentation_img, 0.45)
@@ -57,16 +58,18 @@ def ocr_per_image(img_url):
     chars, charWidths = get_characters(segmentation_img2, lines, lineHeights, words, wordWidths, width / 130.0)
     # process segmented characters
     for l in range(0, len(lines)):
-        line = segmentation_img2[range(lines[l], lines[l] + lineHeights[l])]
+        line = inverted[range(lines[l], lines[l] + lineHeights[l])]
 
         for w in range(0, len(words[l])):
 
-            wordStart = words[l][w];
+            wordStart = words[l][w]
             wordEnd =  words[l][w] + wordWidths[l][w]
             word = line[:,range(wordStart,wordEnd)]
 
             for c in range(0, len(chars[l][w])):
                 char = word[:, chars[l][w][c] :chars[l][w][c] + charWidths[l][w][c]]
+                char = cropImage(char)
+                char = resizeAndPadImage(char, outSize=outSize)
 
                 cv2.imshow("image", char)
                 cv2.waitKey(0)
