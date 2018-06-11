@@ -1,6 +1,4 @@
 # in this files the lines are segmented with a horizontal projection
-import cv2
-from matplotlib import pyplot as plt
 
 import numpy as np
 import statistics

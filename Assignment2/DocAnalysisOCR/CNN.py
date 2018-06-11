@@ -1,16 +1,7 @@
-'''Trains a simple convnet on the MNIST dataset.
-
-Gets to 99.25% test accuracy after 12 epochs
-(there is still a lot of margin for parameter tuning).
-16 seconds per epoch on a GRID K520 GPU.
-'''
-
-
 from __future__ import print_function
 import keras
 import cv2
 import numpy as np
-
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
@@ -19,11 +10,10 @@ import genLetters as gl
 
 batch_size = 128
 num_classes = len(gl.possibleChars)
-epochs = 1 # 12
+epochs = 12
+img_rows, img_cols = 28, 28 # input image dimensions
 
-# input image dimensions
-img_rows, img_cols = 28, 28
-
+# loads the labels and images from the specified tsv file
 def loadDataset(filename):
     print("Loading dataset "+filename)
     images, labels, indizes = [], [], []
@@ -46,11 +36,6 @@ def loadDataset(filename):
 
 x_train, y_train = loadDataset('Train.tsv')
 x_test, y_test = loadDataset('Test.tsv')
-
-# MNIST
-# from keras.datasets import mnist
-# num_classes = 10
-# (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
 if K.image_data_format() == 'channels_first':
     x_train = x_train.reshape(x_train.shape[0], 1, img_rows, img_cols)
