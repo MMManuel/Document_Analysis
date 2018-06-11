@@ -30,6 +30,10 @@ def get_lines(img, heightPercentageThreshold):
                 curHeight = curHeight+1
                 lines.append(i)
 
+    if inLine:
+        inLine = False
+        heights.append(curHeight)
+
     heightThreshold = statistics.median(heights) * heightPercentageThreshold
 
     retLines = []

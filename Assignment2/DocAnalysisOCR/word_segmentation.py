@@ -42,4 +42,8 @@ def get_words(img, lines, heights):
                     inWord = True
                     words[l].append(i)
 
+        if inWord:
+            inWord = False
+            widths[l].append(curWidth)
+
     return words, widths

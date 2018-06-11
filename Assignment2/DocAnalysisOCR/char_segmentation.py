@@ -57,4 +57,8 @@ def get_characters(img, lines, heights, words, wordWidths, minWidth):
                         curWidth = curWidth+1
                         chars[l][w].append(i)
 
+            if inChar:
+                inChar = False
+                widths[l][w].append(curWidth)
+
     return chars, widths
