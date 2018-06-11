@@ -1,6 +1,7 @@
 import cv2
-import numpy as np
 
+
+import xml.etree.ElementTree as ET
 from preprocess import get_segmentation_image
 from preprocess import get_recognition_image
 from preprocess import resizeAndPadImage
@@ -10,11 +11,20 @@ from line_segmentation import get_lines
 from word_segmentation import get_words
 from char_segmentation import get_characters
 
+
+import numpy as np
+from keras.models import load_model
+import genLetters as gl
+
 outSize = 28
 
-def ocr_per_image(img_url):
 
-    orig_image = cv2.imread(img_url, 0)
+print("Loading CNN model and weights")
+model = load_model('ocrCNNmodel.h5')
+
+
+def ocr_per_image(img_name):
+    orig_image = cv2.imread(img_name+'.png', 0)
     #cv2.imshow("image", orig_image)
 
     height, width = orig_image.shape
@@ -56,6 +66,9 @@ def ocr_per_image(img_url):
 
     # get characters
     chars, charWidths = get_characters(segmentation_img2, lines, lineHeights, words, wordWidths, width / 130.0)
+
+    letters = []
+
     # process segmented characters
     for l in range(0, len(lines)):
         line = inverted[range(lines[l], lines[l] + lineHeights[l])]
@@ -70,7 +83,26 @@ def ocr_per_image(img_url):
                 char = word[:, chars[l][w][c] :chars[l][w][c] + charWidths[l][w][c]]
                 char = cropImage(char)
                 char = resizeAndPadImage(char, outSize=outSize)
+                letters.append(char)
 
-                cv2.imshow("image", char)
-                cv2.waitKey(0)
-                cv2.destroyAllWindows()
+                #cv2.imshow("image", char)
+                #cv2.waitKey(0)
+                #cv2.destroyAllWindows()
+
+    numberLetters = len(letters)
+    x = np.zeros((numberLetters, outSize, outSize))
+    for i in range(numberLetters):
+        x[i] = letters[i]
+    x = x.reshape(numberLetters, outSize, outSize, 1)
+    prediction = model.predict(x)
+    pindex = np.argmax(prediction, axis=1)
+    chars = list(map(lambda x: gl.possibleChars[x], pindex))
+    prediction = ''.join(chars).lower()
+
+    gt = ''
+    tree = ET.parse(img_name + '.xml')
+    for child in tree.findall(".//machine-print-line"):
+        gt += child.attrib['text']
+    gt = gt.replace(' ','').lower()
+
+    return gt, prediction

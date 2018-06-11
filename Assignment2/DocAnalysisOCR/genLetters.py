@@ -12,11 +12,12 @@ outSize = 28
 fontColor = (255,255,255)
 bgColor = 0
 fontsize = 50
-font = ImageFont.truetype('Baskerville.ttf', fontsize)
+font = ImageFont.truetype('BaskervilleB.otf', fontsize)
 possibleChars = list(string.ascii_letters + string.digits + ".,")
 
 def paintImage():
-    char = possibleChars[randint(0, len(possibleChars))]
+    index = randint(0, len(possibleChars))
+    char = possibleChars[index]
     img = np.zeros((genSize[0], genSize[1], 3), np.uint8)
     img.fill(bgColor)
 
@@ -28,20 +29,20 @@ def paintImage():
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     img = pp.cropImage(img)
     img = pp.resizeAndPadImage(img, outSize)
-    return img, char
+    return img, char, index
 
 
 def generateImages(numberImages=128, folder='Train'):
+    print('Generating '+str(numberImages)+' Images in folder '+folder)
     Y = []
     for i in range(numberImages):  # Write images to output directory
-        image, label = paintImage()
+        image, label, index = paintImage()
         filename = os.path.join(folder, '{:05d}.png'.format(i))
         cv2.imwrite(filename, image)
-        Y.append(filename + ',' + label)
-    with open(folder + '.csv', 'w') as F:  # Write CSV file
+        Y.append(filename + '\t' + label + '\t' + str(index))
+    with open(folder + '.tsv', 'w') as F:  # Write CSV file
         F.write('\n'.join(Y))
 
 if __name__ == "__main__":
-    print('Generating Images')
-    generateImages(numberImages=100, folder='Train')
-    generateImages(numberImages=100, folder='Test')
+    generateImages(numberImages=16384, folder='Train')
+    generateImages(numberImages=4069, folder='Test')

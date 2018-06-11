@@ -8,34 +8,49 @@ Gets to 99.25% test accuracy after 12 epochs
 
 from __future__ import print_function
 import keras
-import os
 import cv2
 import numpy as np
-from keras.datasets import mnist
+
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 from keras import backend as K
+import genLetters as gl
 
 batch_size = 128
-num_classes = 10
+num_classes = len(gl.possibleChars)
 epochs = 1 # 12
 
 # input image dimensions
 img_rows, img_cols = 28, 28
 
-
-def LoadData(FP = '.'):
-    images, labels = [], []
-    with open('Train.csv') as F:
-        for i, Li in enumerate(F):
-            image, label = Li.strip().split(',')                     #filename,string
-            images.append(cv2.imread(image)[:, :, :3])  # Read image and discard alpha channel
+def loadDataset(filename):
+    print("Loading dataset "+filename)
+    images, labels, indizes = [], [], []
+    with open(filename) as tsvfile:
+        for index, line in enumerate(tsvfile):
+            image, label, index = line.strip().split()
+            img = cv2.imread(image)
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            images.append(img)
             labels.append(label)
-    return np.stack(images), np.stack(labels)
+            indizes.append(index)
+    numberImages = len(images)
+    x = np.zeros((numberImages, img_rows, img_cols))
+    y = np.zeros((numberImages))
+    for i in range(numberImages):
+        x[i] = images[i]
+        y[i] = indizes[i]
+    return x, y
 
-# the data, split between train and test sets
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
+
+x_train, y_train = loadDataset('Train.tsv')
+x_test, y_test = loadDataset('Test.tsv')
+
+# MNIST
+# from keras.datasets import mnist
+# num_classes = 10
+# (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
 if K.image_data_format() == 'channels_first':
     x_train = x_train.reshape(x_train.shape[0], 1, img_rows, img_cols)
@@ -83,9 +98,5 @@ score = model.evaluate(x_test, y_test, verbose=0)
 print('Test loss:', score[0])
 print('Test accuracy:', score[1])
 
-model_json = model.to_json()
-
-with open("model_json", "w") as json_file:
-  json_file.write(model_json)
-
-model.save_weights("model.h5")
+print('Saving model and weights')
+model.save('ocrCNNmodel.h5')
