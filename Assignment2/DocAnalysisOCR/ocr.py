@@ -13,6 +13,7 @@ from char_segmentation import get_characters
 import numpy as np
 from keras.models import load_model
 import genLetters as gl
+import html
 
 outSize = 28
 
@@ -66,6 +67,8 @@ def ocr_per_image(img_name):
     letters = []
 
     # process segmented characters
+    spaces = []
+    letterindex = 0
     for l in range(0, len(lines)):
         line = inverted[range(lines[l], lines[l] + lineHeights[l])]
 
@@ -85,6 +88,10 @@ def ocr_per_image(img_name):
                 # cv2.waitKey(0)
                 # cv2.destroyAllWindows()
 
+                letterindex += 1
+            spaces.append(letterindex)
+            letterindex += 1
+
     numberLetters = len(letters)
     x = np.zeros((numberLetters, outSize, outSize))
     for i in range(numberLetters):
@@ -93,12 +100,16 @@ def ocr_per_image(img_name):
     prediction = model.predict(x)
     pindex = np.argmax(prediction, axis=1)
     chars = list(map(lambda x: gl.possibleChars[x], pindex))
-    prediction = ''.join(chars).lower()
+    for spaceindex in spaces:
+        chars.insert(spaceindex, ' ')
+    prediction = ''.join(chars)
+    #print(prediction)
 
     gt = ''
     tree = ET.parse(img_name + '.xml')
     for child in tree.findall(".//machine-print-line"):
-        gt += child.attrib['text']
-    gt = gt.replace(' ', '').lower()
+        gt += html.unescape(child.attrib['text'])
+    gt = gt
+    #print(gt)
 
     return gt, prediction
