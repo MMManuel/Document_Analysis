@@ -4,6 +4,10 @@ import numpy as np
 
 import os
 
+# TODOs before
+# Generate Test/Training dataset using genLetters.py
+# Generate CNN-Model using CNN.py
+
 # reads all images from the dataset and calculates the levenshtein distance
 foldername = '../I AM printed/'
 all = []

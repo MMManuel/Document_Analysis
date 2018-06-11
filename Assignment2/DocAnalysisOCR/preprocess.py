@@ -33,6 +33,8 @@ def unify_image(im, size):
     ratio = float(size) / max(old_size)
     new_size = tuple([int(x * ratio) for x in old_size])
 
+    if (new_size[0] == 0 or new_size[1] == 0): return None
+
     # new_size should be in (width, height) format
     im = cv2.resize(im, (new_size[1], new_size[0]))
 

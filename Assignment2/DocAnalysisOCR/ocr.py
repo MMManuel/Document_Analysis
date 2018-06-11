@@ -82,6 +82,7 @@ def ocr_per_image(img_name):
                 char = word[:, chars[l][w][c]:chars[l][w][c] + charWidths[l][w][c]]
                 char = cropImage(char)
                 char = unify_image(char, size=outSize)
+                if char is None: continue
                 letters.append(char)
 
                 # cv2.imshow("image", char)
